@@ -94,14 +94,6 @@
           "resources/voices",
           "resources/languages"
         ]
-      },
-      {
-        "group": "Common Issues",
-        "pages": [
-          "common-issues/ios-dash",
-          "common-issues/permissions",
-          "common-issues/server-removal"
-        ]
       }
     ]
   },
