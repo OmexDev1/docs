@@ -21,6 +21,12 @@
             ]
           },
           {
+            "group": "Resources",
+            "pages": [
+              "Resources/Embeds",
+            ]
+          },
+          {
             "group": "Security Setup",
             "pages": [
               "security/antinuke"
