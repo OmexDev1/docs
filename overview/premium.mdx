@@ -4,7 +4,7 @@ description: "Gain access to exclusive rewards by donating to Omex."
 icon: "dollar-sign"
 ---
 
-## How to obtain Donator Perks
+## How to get Donator Perks
 
 <Warning>
   Click [here](https://discord.gg/thbuzS7BxK) to purchase premium permanently, or vote [here](https://top.gg/bot/1413649582340182158) to access premium commands for free!
@@ -15,150 +15,62 @@ icon: "dollar-sign"
     <Info>
       **Tier 3** donator perks grant you **early access** to new commands before they are released.
     </Info>
-
     <AccordionGroup>
-      <Accordion title="ChatGPT">
-        Ask ChatGPT a question.
+      <Accordion title="Last.fm Account Linking">
+        Link your Last.fm account to Omex.
 
         <CodeGroup>
-          ```javascript Syntax
-          ,chatgpt (question)
-          ```
 
-          ```javascript Example
-          ,chatgpt am i cute?
-          ```
-        </CodeGroup>
-      </Accordion>
-
-      <Accordion title="Last.fm Mode">
-        Customize the embed layout of the `nowplaying` command.
-
-        <CodeGroup>
-          ```javascript Syntax
-          ,lastfm mode (embed script)
-          ,lastfm mode (check|reset)
-          ```
-
-          ```javascript Example
-          ,lastfm mode {embed}$v{title:Now Playing}$v{description: {track.name}}$v{thumbnail: {album.cover}}
-          ```
-        </CodeGroup>
-      </Accordion>
-
-      <Accordion title="Last.fm Custom Reactions">
-        Customize the reactions that appear under the `nowplaying` command.
-
-        <CodeGroup>
-          ```javascript Syntax
-          ,lastfm cr (upvote emoji) (downvote emoji)
-          ```
-
-          ```javascript Example
-          ,lastfm cr 👍 👎
-          ```
-        </CodeGroup>
-      </Accordion>
-
-      <Accordion title="Video to GIF conversion">
-        Easily convert a video to a GIF.
-
-        <CodeGroup>
-          ```javascript Syntax
-          ,makegif (video URL) <quality> <fps> <ff>
-          ```
-
-          ```javascript Example
-          ,makegif https://Omex.bot/backflip.mp4 100 30 2
-          ```
-        </CodeGroup>
-      </Accordion>
-
-      <Accordion title="Clever Chatbot">
-        Interact with the latest model of cleverbot.
-
-        <Info>
-          `Omex clever` is the unique prefix for this command.
-        </Info>
-
-        <CodeGroup>
-          ```javascript Syntax
-          Omex clever (question)
-          ```
-
-          ```javascript Example
-          Omex clever I know what you are...
-          ```
-        </CodeGroup>
-      </Accordion>
-
-      <Accordion title="Background Removal">
-        Remove the background from an image.
-
-        <CodeGroup>
-          ```javascript Syntax
-          ,transparent (image URL)
-          ```
-
-          ```javascript Example
-          ,transparent https://Omex.bot/epic_face.png
-          ```
-        </CodeGroup>
-      </Accordion>
-
-      <Accordion title="VoiceMaster Ghost">
-        Hide your temporary VoiceMaster channel.
-
-        ```javascript Syntax
-        ,voicemaster ghost
+        ```text Syntax
+        ,lastfm set (username)
         ```
-      </Accordion>
 
-      <Accordion title="Custom Prefix">
-        Set your own custom command prefix across all servers that utilize Omex.
+        
+        ```text Example
+        ,lastfm set Aj.wtf
+        ```
 
-        <CodeGroup>
-          ```javascript Syntax
-          ,prefix self (prefix)
-          ```
-
-          ```javascript Example
-          ,prefix self j
-          ```
         </CodeGroup>
       </Accordion>
-
-      <Accordion title="Instagram Notifications">
-        Stream posts & stories from an Instagram account to a text channel.
-
-        <Tip>
-          More information on this command can be found in the
-          [Social Notifications](/integrations/social-notifications) section.
-        </Tip>
+      <Accordion title="Custom Self Prefix">
+        Set your own personal command prefix across all servers.
 
         <CodeGroup>
-          ```javascript Syntax
-          ,instagram add (channel) (username)
-          ```
 
-          ```javascript Example
-          ,instagram add #notifs jonathan
-          ```
+        ```text Syntax
+        ,prefix self set (prefix)
+        ```
+
+        
+        ```text Example
+        ,prefix self set ??
+        ```
+
         </CodeGroup>
       </Accordion>
     </AccordionGroup>
   </Tab>
-
   <Tab title="Tier 2">
     <AccordionGroup>
-      {/* Tier 2 accordions unchanged */}
-      {/* Content identical to Tier 3 minus Instagram + early access */}
+      <Accordion title="ChatGPT">
+        Ask ChatGPT a question directly from Discord.
+
+        <CodeGroup>
+
+        ```text Syntax
+        ,chatgpt (question)
+        ```
+
+        
+        ```text Example
+        ,chatgpt who are you
+        ```
+
+        </CodeGroup>
+      </Accordion>
     </AccordionGroup>
   </Tab>
-
-  <Tab title="Tier 1">
-    <AccordionGroup>
-      {/* Tier 1 accordions unchanged */}
-    </AccordionGroup>
+  <Tab title="Tier 3">
+    
   </Tab>
 </Tabs>
