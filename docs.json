@@ -9,23 +9,34 @@
   },
   "favicon": "favicon.png",
   "navigation": {
-    "groups": [
-      {
-        "group": "Overview",
-        "pages": ["overview/introduction", "overview/premium"]
-      },
-      {
-        "group": "Security Setup",
-        "pages": ["security/antinuke"]
-      }
-    ],
     "tabs": [
+      {
+        "tab": "Docs",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "overview/introduction",
+              "overview/premium"
+            ]
+          },
+          {
+            "group": "Security Setup",
+            "pages": [
+              "security/antinuke"
+            ]
+          }
+        ]
+      },
       {
         "tab": "Legal",
         "groups": [
           {
             "group": "Legal",
-            "pages": ["legal/tos", "legal/privacypolicy"]
+            "pages": [
+              "legal/tos",
+              "legal/privacypolicy"
+            ]
           }
         ]
       }
