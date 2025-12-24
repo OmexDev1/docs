@@ -6,28 +6,175 @@ icon: "fingerprint"
 
 ## Why use an antinuke system?
 
-It's important to have an antinuke system in place to prevent moderators from abusing their permissions. This is a security measure which lets your server stay safe from any harmful actions.
+An antinuke system helps protect your server from destructive actions performed by moderators/staff—whether intentionally or through a compromised account. It limits how many high-impact actions someone can do within a short time window and automatically responds when that limit is exceeded.
 
-## How does the antinuke work?
+## How does **this** antinuke work?
 
-The antinuke will set a limit on the number of actions a moderator can perform in a certain time frame. If the limit is exceeded, the moderator will be punished and a message will be sent to the owner.
+This system is **audit-log + rate-limit** based.
 
-## Configuring the antinuke
+1. **A server event happens** (e.g. channel created, role deleted, member banned).
+2. The bot **reads the Audit Log** to determine **who** performed the action.
+3. The bot checks if the actor is **bypassed** (owner/whitelisted).
+4. A **ratelimiter** tracks how many actions that actor has done within **10 seconds**.
+5. If the actor exceeds the configured **threshold**, AntiNuke:
+   - **Logs** an alert to your configured log channel (if enabled)
+   - **Punishes** the actor (`ban`, `kick`, or `stripstaff`)
+   - **Reverts** what it can (e.g. deletes newly-created channels/roles, reverts permission escalation, deletes mention spam messages)
+
+### What it can and cannot revert
+
+**Can revert:**
+
+- Channel creation (it deletes the created channel after trigger)
+- Role creation (it deletes the created role after trigger)
+- Dangerous permission escalation on roles (it edits permissions back)
+- Dangerous roles granted to members (it removes the roles)
+- Mention spam (it deletes cached messages in the last 10 seconds)
+- Webhook abuse (it can delete webhooks if it has permission)
+
+**Cannot reliably revert:**
+
+- Channel deletions (Discord does not provide a true restore)
+- Role deletions (same limitation)
+
+AntiNuke will still **punish and log** the actor for deletions.
+
+---
+
+## Requirements
+
+### Bot permissions (important)
+
+AntiNuke relies heavily on audit logs and moderation permissions. Recommended permissions:
+
+- **View Audit Log** _(required for most modules to function)_
+- **Ban Members** _(if you use ban punishment)_
+- **Kick Members** _(if you use kick punishment)_
+- **Manage Roles** _(required for stripstaff + reverting perms + removing dangerous roles)_
+- **Manage Channels** _(required to delete channels it created / clean up)_
+- **Manage Webhooks** _(required to remove abusive webhooks)_
+- **Read Message History** _(for mention spam deletion)_
+- **Manage Messages** _(helps with deleting mention messages)_
+
+> If your bot does not have a required permission, that module may silently fail to punish/revert.
+
+---
+
+## Quick setup
+
+1. Invite the bot with the permissions above.
+2. Enable Antinuke: `,antinuke on`
+3. Set a log channel: `,antinuke logchannel #logs`
+4. Add trusted Antinuke admins (optional): `,antinuke admin @user`
+5. Configure modules (recommended set below).
+6. Verify config: `,antinuke configuration`
+
+---
+
+## Core commands
+
+### Enable AntiNuke (server owner only)
+
+<CodeGroup>
+
+```javascript Syntax
+,antinuke on
+```
+
+
+```javascript Example
+,antinuke on
+```
+
+</CodeGroup>
+
+<br />
+
+<Frame>
+  <img
+    src="/images/security/antinuke/on.png"
+    alt=""
+    style={{ width:"100%" }}
+  />
+</Frame>
+
+### Disable AntiNuke (server owner only)
+
+This disables AntiNuke and resets the stored configuration.
+
+<CodeGroup>
+
+```javascript Syntax
+,antinuke off
+```
+
+
+```javascript Example
+,antinuke off
+```
+
+</CodeGroup>
+
+<br />
+
+<Frame>
+  <img
+    src="/images/security/antinuke/off.png"
+    alt=""
+    style={{ width:"100%" }}
+  />
+</Frame>
+
+### Set the log channel (server owner only)
+
+<CodeGroup>
+
+```javascript Syntax
+,antinuke logchannel (#channel)
+```
+
+
+```javascript Example
+,antinuke logchannel #security-logs
+```
+
+</CodeGroup>
+
+#### Disable logging
+
+<CodeGroup>
+
+```javascript Syntax
+,antinuke logchannel
+```
+
+
+```javascript Example
+,antinuke logchannel
+```
+
+</CodeGroup>
+
+<br />
+
+<Frame>
+  <img
+    src="/images/security/antinuke/logchannel.png"
+    alt=""
+    style={{ width:"100%" }}
+  />
+</Frame>
+
+---
+
+## Admins and bypassing
+
+### Allowing other users to configure AntiNuke (server owner only)
+
+The server owner can toggle AntiNuke Admin on a member.
 
 <Warning>
-  Discord recently implemented a new **mass ban** feature which can quickly ban
-  **100\+ members**. It's **HIGHLY** recommended to utilize [fake
-  permissions](/security/fake-permissions) to prevent moderators from using this
-  feature.
-</Warning>
-
-### Allowing users to configure the antinuke
-
-Initially, only the **server owner** can configure the antinuke. However, you can allow other users to configure the antinuke with the `antinuke admin` command.
-
-<Warning>
-  This is a dangerous command and will allow the user to entirely alter the
-  antinuke configuration.
+  This is dangerous. AntiNuke Admins can alter protections and reduce thresholds.
 </Warning>
 
 <CodeGroup>
@@ -38,7 +185,7 @@ Initially, only the **server owner** can configure the antinuke. However, you ca
 
 
 ```javascript Example
-,antinuke admin @jonathan
+,antinuke admin @aj.wtf
 ```
 
 </CodeGroup>
@@ -46,16 +193,44 @@ Initially, only the **server owner** can configure the antinuke. However, you ca
 <br />
 
 <Frame>
-  ![](/images/security/antinuke/admin.png)
+  <img
+    src="/images/security/antinuke/admin.png"
+    alt=""
+    style={{ width:"100%" }}
+  />
 </Frame>
 
-### Exempting users from the antinuke
+### Viewing AntiNuke Admins (server owner only)
 
-You can exempt users from the antinuke with the `antinuke whitelist` command.
+<CodeGroup>
+
+```javascript Syntax
+,antinuke admins
+```
+
+
+```javascript Example
+,antinuke admins
+```
+
+</CodeGroup>
+
+<br />
+
+<Frame>
+  <img
+    src="/images/security/antinuke/admins.png"
+    alt=""
+    style={{ width:"100%" }}
+  />
+</Frame>
+
+### Whitelisting (bypass AntiNuke)
+
+Whitelisted users do not trigger antinuke punishments.
 
 <Warning>
-  This is a dangerous command and will allow the user to bypass the antinuke
-  entirely.
+  Dangerous: this bypasses ALL modules.
 </Warning>
 
 <CodeGroup>
@@ -74,309 +249,428 @@ You can exempt users from the antinuke with the `antinuke whitelist` command.
 <br />
 
 <Frame>
-  ![](/images/security/antinuke/whitelist.png)
+  <img
+    src="/images/security/antinuke/wl.png"
+    alt=""
+    style={{ width:"100%" }}
+  />
 </Frame>
+
+#### Unwhitelist
+
+<CodeGroup>
+
+```javascript Syntax
+,antinuke unwhitelist (user)
+```
+
+
+```javascript Example
+,antinuke unwhitelist @jonathan
+```
+
+</CodeGroup>
+
+#### View whitelisted users
+
+<CodeGroup>
+
+```javascript Syntax
+,antinuke whitelisted
+```
+
+
+```javascript Example
+,antinuke whitelisted
+```
+
+</CodeGroup>
+
+<br />
+
+<Frame>
+  <img
+    src="/images/security/antinuke/whitelisted.png"
+    alt=""
+    style={{ width:"100%" }}
+  />
+</Frame>
+
+---
 
 ## Enabling an antinuke module
 
-### Available Flags
+Modules are configured per feature (ban/kick/channelcreation/etc). Each module is stored with:
 
-The following flags can be used to define the antinuke module
+- `status` (on/off)
+- `punishment` (`ban`, `kick`, `stripstaff`)
+- `threshold` (1–12)
+- `command` (true/false) _(stored; your listeners are audit-log based)_
+
+### Available Flags
 
 <AccordionGroup>
   <Accordion title="Threshold">
-    The threshold is the number of actions a moderator can perform before being punished.
+    Number of actions allowed in a **10 second** window before AntiNuke triggers.
+
+    ````
     <Info>
-      It's recommended to keep the threshold between `1` and `6` to stay safe.
+      Recommended:
+      - **1–2** for destructive actions (deletions, dangerous permissions)
+      - **2–4** for creation spam (channels/roles)
+      - **3–5** for mentions
     </Info>
-
+    
     <CodeGroup>
-
+    
     ```javascript Syntax
     --threshold (number)
     ```
-
     
     ```javascript Example
     --threshold 3
     ```
-
+    
     </CodeGroup>
+    ````
   </Accordion>
   <Accordion title="Punishment">
-    The punishment which will be applied to the moderator.
+    Action taken against the actor when the module triggers.
+
+    ````
     <Info>
-      Available punishments can be found in the [punishments](/resources/syntax#flag-punishments) section.
+      Punishments:
+      - `ban`
+      - `kick`
+      - `stripstaff` (removes staff roles the bot is allowed to remove)
     </Info>
-
+    
     <CodeGroup>
-
+    
     ```javascript Syntax
     --do (punishment)
     ```
-
     
     ```javascript Example
-    --do ban
+    --do stripstaff
     ```
-
+    
     </CodeGroup>
+    ````
   </Accordion>
-  <Accordion title="Command Detection">
-    Whether Omex commands should be counted towards the threshold. (e.g. `,ban`)
+  <Accordion title="Command detection">
+    Stored in configuration as `command: true/false`.
 
+    ````
+    <Info>
+      In this code, triggers rely on audit logs and events, not command parsing.
+      Keep it enabled for consistency with your config schema.
+    </Info>
+    
     <CodeGroup>
-
+    
     ```javascript Syntax
-    --command (on | off)
+    --command (true | false)
     ```
-
     
     ```javascript Example
-    --command on
+    --command true
     ```
-
+    
     </CodeGroup>
+    ````
   </Accordion>
 </AccordionGroup>
 
-### Available Modules
+---
+
+## Modules (exactly matching your code)
 
 <AccordionGroup>
-  <Accordion title="Punishing members for changing the vanity URL">
-    You can prevent members from changing the vanity URL with the following command
+  <Accordion title="Mass ban">
+    Triggers on `on_member_ban` and checks audit logs for who banned.
 
+    ````
+    <CodeGroup>
+    
+    ```javascript Syntax
+    ,antinuke ban (on or off) --threshold (number) --do (punishment) --command (true | false)
+    ```
+    
+    ```javascript Example
+    ,antinuke ban on --threshold 3 --do ban --command true
+    ```
+    
+    </CodeGroup>
+    
+    <Frame>
+      <img src="/images/security/antinuke/ban.png" alt="" style={{ width:"100%" }} />
+    </Frame>
+    ````
+  </Accordion>
+  <Accordion title="Mass kick">
+    Triggers on `on_member_remove` and checks audit logs for kick actions.
+
+    ````
+    <CodeGroup>
+    
+    ```javascript Syntax
+    ,antinuke kick (on or off) --threshold (number) --do (punishment) --command (true | false)
+    ```
+    
+    ```javascript Example
+    ,antinuke kick on --threshold 3 --do ban --command true
+    ```
+    
+    </CodeGroup>
+    
+    <Frame>
+      <img src="/images/security/antinuke/kick.png" alt="" style={{ width:"100%" }} />
+    </Frame>
+    ````
+  </Accordion>
+  <Accordion title="Channel creation">
+    Triggers on `on_guild_channel_create`. If it triggers, it punishes the actor and deletes the created channel.
+
+    ````
+    <CodeGroup>
+    
+    ```javascript Syntax
+    ,antinuke channelcreation (on or off) --threshold (number) --do (punishment)
+    ```
+    
+    ```javascript Example
+    ,antinuke channelcreation on --threshold 2 --do stripstaff
+    ```
+    
+    </CodeGroup>
+    
+    <Frame>
+      <img src="/images/security/antinuke/channelcreation.png" alt="" style={{ width:"100%" }} />
+    </Frame>
+    ````
+  </Accordion>
+  <Accordion title="Channel deletion">
+    Triggers on `on_guild_channel_delete`. Punishes/logs on threshold.
+
+    ````
     <Warning>
-      Omex can not change the vanity URL back to the original due to Discord limitations.
+      Deleted channels cannot be automatically restored.
     </Warning>
+    
     <CodeGroup>
-
+    
     ```javascript Syntax
-    ,antinuke vanity (on or off) [--do (punishment)]
+    ,antinuke channeldeletion (on or off) --threshold (number) --do (punishment)
     ```
-
     
     ```javascript Example
-    ,antinuke vanity on --do ban
+    ,antinuke channeldeletion on --threshold 1 --do ban
     ```
-
+    
     </CodeGroup>
-
-    <br />
-
+    
     <Frame>
-      ![](/images/security/antinuke/vanity.png)
+      <img src="/images/security/antinuke/channeldeletion.png" alt="" style={{ width:"100%" }} />
     </Frame>
+    ````
   </Accordion>
-  <Accordion title="Preventing bots from being added">
-    You can prevent bots from being mass added with the following command
+  <Accordion title="Role creation">
+    Triggers on `on_guild_role_create`. If it triggers, it punishes the actor and deletes the created role.
 
-    <Info>
-      You'll need to use `antinuke whitelist (bot ID)` to invite bots.
-    </Info>
+    ````
     <CodeGroup>
-
+    
     ```javascript Syntax
-    ,antinuke botadd (on or off)
+    ,antinuke rolecreation (on or off) --threshold (number) --do (punishment)
     ```
-
     
     ```javascript Example
-    ,antinuke botadd on
+    ,antinuke rolecreation on --threshold 2 --do stripstaff
     ```
-
+    
     </CodeGroup>
-
-    <br />
-
+    
     <Frame>
-      ![](/images/security/antinuke/botadd.png)
+      <img src="/images/security/antinuke/rolecreation.png" alt="" style={{ width:"100%" }} />
     </Frame>
+    ````
   </Accordion>
-  <Accordion title="Preventing members from being banned">
-    You can prevent members from being mass banned with the following command
+  <Accordion title="Role deletion">
+    Triggers on `on_guild_role_delete`. Punishes/logs on threshold.
 
-    <Info>
-      It's recommended to include the `--command on` flag.
-    </Info>
+    ````
+    <Warning>
+      Deleted roles cannot be automatically restored.
+    </Warning>
+    
     <CodeGroup>
-
+    
     ```javascript Syntax
-    ,antinuke ban (on or off) [--threshold (number)] [--do (punishment)] [--command (on | off)]
+    ,antinuke roledeletion (on or off) --threshold (number) --do (punishment)
     ```
-
     
     ```javascript Example
-    ,antinuke ban on --threshold 3 --do ban --command on
+    ,antinuke roledeletion on --threshold 1 --do ban
     ```
-
+    
     </CodeGroup>
-
-    <br />
-
+    
     <Frame>
-      ![](/images/security/antinuke/ban.png)
+      <img src="/images/security/antinuke/roledeletion.png" alt="" style={{ width:"100%" }} />
     </Frame>
+    ````
   </Accordion>
-  <Accordion title="Preventing members from being kicked">
-    You can prevent members from being mass kicked with the following command
+  <Accordion title="Webhooks">
+    Triggers on `on_webhooks_update`. Looks for webhook create/delete/update in audit logs. If it triggers and the bot has `Manage Webhooks`, it deletes webhooks in that channel.
 
-    <Info>
-      It's recommended to include the `--command on` flag.
-    </Info>
+    ````
     <CodeGroup>
-
+    
     ```javascript Syntax
-    ,antinuke kick (on or off) [--threshold (number)] [--do (punishment)] [--command (on | off)]
+    ,antinuke webhooks (on or off) --threshold (number) --do (punishment)
     ```
-
     
     ```javascript Example
-    ,antinuke kick on --threshold 3 --do ban --command on
+    ,antinuke webhooks on --threshold 1 --do ban
     ```
-
+    
     </CodeGroup>
-
-    <br />
-
+    
     <Frame>
-      ![](/images/security/antinuke/kick.png)
+      <img src="/images/security/antinuke/webhooks.png" alt="" style={{ width:"100%" }} />
     </Frame>
+    ````
   </Accordion>
-  <Accordion title="Preventing roles from being deleted">
-    You can prevent roles from being mass deleted with the following command
+  <Accordion title="Mass mentions">
+    Triggers on `on_message`. Counts mentions in each message:
 
-    <Info>
-      It's recommended to include the `--command on` flag.
-    </Info>
+    - `@everyone/@here` adds **5**
+    - user mentions add **1 each**
+    - role mentions add **1 each**
+
+    ````
+    If the message includes any mentions, it caches the message ID.
+    When threshold triggers, it deletes cached mention messages from the last 10 seconds and punishes/logs.
+    
     <CodeGroup>
-
+    
     ```javascript Syntax
-    ,antinuke role (on or off) [--threshold (number)] [--do (punishment)] [--command (on | off)]
+    ,antinuke mentions (on or off) --threshold (number) --do (punishment)
     ```
-
     
     ```javascript Example
-    ,antinuke role on --threshold 3 --do ban --command on
+    ,antinuke mentions on --threshold 3 --do stripstaff
     ```
-
+    
     </CodeGroup>
-
-    <br />
-
+    
     <Frame>
-      ![](/images/security/antinuke/role.png)
+      <img src="/images/security/antinuke/mentions.png" alt="" style={{ width:"100%" }} />
     </Frame>
+    ````
   </Accordion>
-  <Accordion title="Preventing channels from being created or deleted">
-    You can prevent channels from being mass created or deleted with the following command
+  <Accordion title="Dangerous permissions">
+    This module covers TWO cases:
 
+    ````
+    **1) Role permission escalation**
+    - Event: `on_guild_role_update(before, after)`
+    - If dangerous permissions were ADDED, it finds who did it via audit logs.
+    - If threshold triggers, it reverts the role permissions back to `before.permissions` and punishes/logs.
+    
+    **2) Dangerous role granted to a member**
+    - Event: `on_member_update(before, after)`
+    - Detects newly added roles on the member.
+    - If any added role has dangerous permissions, it finds the actor via audit logs.
+    - If threshold triggers, it removes the dangerous roles from the target member and punishes/logs.
+    
     <CodeGroup>
-
+    
     ```javascript Syntax
-    ,antinuke channel (on or off) [--threshold (number)] [--do (punishment)]
+    ,antinuke permissions (on or off) --threshold (number) --do (punishment)
     ```
-
     
     ```javascript Example
-    ,antinuke channel on --threshold 3 --do ban
+    ,antinuke permissions on --threshold 1 --do ban
     ```
-
-    </CodeGroup>
-
-    <br />
-
-    <Frame>
-      ![](/images/security/antinuke/channel.png)
-    </Frame>
-  </Accordion>
-  <Accordion title="Preventing emojis from being deleted">
-    You can prevent emojis from being mass deleted with the following command
-
-    <CodeGroup>
-
-    ```javascript Syntax
-    ,antinuke emoji (on or off) [--threshold (number)] [--do (punishment)]
-    ```
-
     
-    ```javascript Example
-    ,antinuke emoji on --threshold 3 --do ban
-    ```
-
     </CodeGroup>
-
-    <br />
-
-    <Frame>
-      ![](/images/security/antinuke/emoji.png)
-    </Frame>
-  </Accordion>
-  <Accordion title="Preventing webhooks from being created">
-    You can prevent webhooks from being mass created with the following command
-
-    <CodeGroup>
-
-    ```javascript Syntax
-    ,antinuke webhook (on or off) [--threshold (number)] [--do (punishment)]
-    ```
-
     
-    ```javascript Example
-    ,antinuke webhook on --threshold 3 --do ban
-    ```
-
-    </CodeGroup>
-
-    <br />
-
     <Frame>
-      ![](/images/security/antinuke/webhook.png)
+      <img src="/images/security/antinuke/permissions.png" alt="" style={{ width:"100%" }} />
     </Frame>
+    ````
   </Accordion>
 </AccordionGroup>
 
-## Disabling an antinuke module
+---
 
-You can disable an antinuke module with the same command you used to enable it, but with the status set to `off`.
+## Viewing configuration
 
-## Viewing the antinuke configuration
+Shows AntiNuke enabled status + each module state and parameters.
 
-You can use the `antinuke config` command to view the current antinuke configuration.
+<CodeGroup>
 
-<Frame>
-  ![](/images/security/antinuke/config.png)
-</Frame>
+```javascript Syntax
+,antinuke configuration
+```
 
-### Viewing the modules & whitelist
 
-You can use the `antinuke list` command to view the enabled modules and whitelisted users.
+```javascript Example
+,antinuke configuration
+```
 
-<Frame>
-  ![](/images/security/antinuke/list.png)
-</Frame>
+</CodeGroup>
 
-### Viewing users with antinuke admin
-
-You can use the `antinuke admins` command to view users which can configure the antinuke.
+<br />
 
 <Frame>
-  ![](/images/security/antinuke/admins.png)
+  <img
+    src="/images/security/antinuke/config.png"
+    alt=""
+    style={{ width:"100%" }}
+  />
 </Frame>
 
-### Permissions available for `antinuke permissions (grant or remove)`
+---
 
-| Antinuke Permissions |
-| -------------------- |
-| `administrator`      |
-| `ban_members`        |
-| `mention_everyone`   |
-| `kick_members`       |
-| `moderate_members`   |
-| `manage_guild`       |
-| `manage_channels`    |
-| `manage_roles`       |
-| `view_audit_log`     |
-| `manage_webhooks`    |
-| `manage_expressions` |
-| `manage_nicknames`   |
+## Troubleshooting
+
+### Nothing triggers
+
+- Ensure the bot has **View Audit Log**
+- Ensure AntiNuke is enabled: `,antinuke configuration`
+- Ensure the specific module is enabled (shows ✅)
+- Ensure the bot’s role is high enough to punish/remove roles
+- Check your log channel is set properly
+
+### stripstaff doesn’t work
+
+- Bot must have **Manage Roles**
+- Bot’s highest role must be **above** the roles it is attempting to remove
+
+### mentions module doesn’t work
+
+- Ensure **Message Content** intent is enabled
+- Ensure the bot can read messages in the channels
+- Ensure the module is enabled: `,antinuke mentions on ...`
+
+---
+
+## Dangerous permissions tracked in code
+
+These permission keys are treated as “dangerous”:
+
+| Dangerous Permission Keys |
+| ------------------------- |
+| `administrator`           |
+| `manage_guild`            |
+| `manage_roles`            |
+| `manage_channels`         |
+| `manage_webhooks`         |
+| `ban_members`             |
+| `kick_members`            |
+| `mention_everyone`        |
+| `moderate_members`        |
+| `manage_nicknames`        |
