@@ -98,8 +98,8 @@
     ]
   },
   "logo": {
-    "light": "https://Omex.bot/Omex.png",
-    "dark": "https://Omex.bot/Omex.png"
+    "light": "favicon.png",
+    "dark": "favicon.png"
   },
   "appearance": {
     "default": "dark",
