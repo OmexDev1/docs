@@ -23,7 +23,6 @@
         "pages": [
           "security/antinuke",
           "security/antiraid",
-          "security/moderation",
           "security/fake-permissions"
         ]
       },
@@ -39,60 +38,7 @@
               "configuration/roles/reaction",
               "configuration/roles/button"
             ]
-          },
-          {
-            "group": "Messages",
-            "icon": "message",
-            "pages": [
-              "configuration/messages/system",
-              "configuration/messages/responder",
-              "configuration/messages/timer"
-            ]
-          },
-          "configuration/starboard",
-          "configuration/voicemaster",
-          "configuration/level-rewards",
-          "configuration/bump-reminder",
-          "configuration/reaction-triggers",
-          "configuration/command-aliases",
-          "configuration/logging"
-        ]
-      },
-      {
-        "group": "Miscellaneous",
-        "pages": [
-          "miscellaneous/music",
-          "miscellaneous/webhook",
-          "miscellaneous/giveaway",
-          "miscellaneous/counters"
-        ]
-      },
-      {
-        "group": "Integrations",
-        "pages": [
-          "integrations/spotify",
-          "integrations/lastfm",
-          "integrations/fortnite",
-          "integrations/social-notifications"
-        ]
-      },
-      {
-        "group": "Resources",
-        "pages": [
-          "resources/syntax",
-          {
-            "group": "Scripting",
-            "icon": "scroll",
-            "pages": [
-              "resources/scripting/embeds",
-              "resources/scripting/variables",
-              "resources/scripting/pagination"
-            ]
-          },
-          "resources/permissions",
-          "resources/events",
-          "resources/voices",
-          "resources/languages"
+          }
         ]
       }
     ]
