@@ -1,229 +1,56 @@
 ---
-title: Join Gate
-description: "Prevent automated accounts from joining your server."
-icon: person-to-door
+title: "Terms of Service"
+description: "Omex bot tos"
 ---
 
-## Configuring the antiraid system
+## **1. Terms of Use**
 
-### Preventing mass joins
+By accessing or using Omex (the “Bot”), its website, or any related services, you agree to be bound by these Terms of Service, all applicable laws and regulations, and accept full responsibility for compliance with any local laws.
 
-This module will trigger when the number of accounts joining the server exceeds the threshold within a short time frame.
+If you do not agree with these Terms, you are prohibited from using Omex or accessing its services. All materials and services are protected by applicable copyright, trademark, and intellectual property laws.
 
-<Warning>
-  Whenever the threshold is reached, the server will be placed in a raid state.
-  This will temporarily disable intensive events which Omex dispatches, such as
-  **welcome** and **goodbye** messages.
-</Warning>
+## **2. Use License**
 
-<CodeGroup>
-```javascript Syntax
-,antiraid massjoin (on or off) [--threshold (number)] [--do (action)] [--lock (true | false)] [--punish (true | false)]
-```
+Permission is granted to temporarily download or view one copy of the materials (such as documentation or software) on Omex’s website for personal, non-commercial, and transitory use only. This is a limited license, not a transfer of ownership.
 
-```javascript Example
-,antiraid massjoin on --threshold 5 --do ban --lock true --punish true
-```
+Under this license, you may not:
 
-</CodeGroup>
-<br />
-<AccordionGroup>
-    <Accordion title="Threshold">
-        The threshold is the number of accounts that can join the server within the time frame.
-        <Info>It's recommended to keep the threshold between `5` and `10` to stay safe.</Info>
-        <CodeGroup>
-        ```javascript Syntax
-        --threshold (number)
-        ```
+- Modify or copy the materials.
+- Use the materials for any commercial purpose or public display (commercial or non-commercial).
+- Attempt to decompile, reverse engineer, or otherwise access the source code of Omex.
+- Remove copyright notices, trademarks, or proprietary labels from the materials.
+- Transfer the materials to another person or “mirror” them on another server.
 
-        ```javascript Example
-        --threshold 5
-        ```
-        </CodeGroup>
-    </Accordion>
-    <Accordion title="Punishment">
-        The action which will be taken when the threshold is reached.
-        <Info>Available actions are `ban` and `kick`.</Info>
-        <CodeGroup>
-        ```javascript Syntax
-        --do (action)
-        ```
+This license will automatically terminate if you violate these restrictions. Omex reserves the right to terminate access at any time. Upon termination, you must destroy any downloaded or stored materials, whether in electronic or printed form.
 
-        ```javascript Example
-        --do ban
-        ```
-        </CodeGroup>
-    </Accordion>
-    <Accordion title="Lock channels">
-        Whether to lock all channels when the threshold is reached.
-        <CodeGroup>
-        ```javascript Syntax
-        --lock (true | false)
-        ```
+## **3. Disclaimer**
 
-        ```javascript Example
-        --lock true
-        ```
-        </CodeGroup>
-    </Accordion>
-    <Accordion title="Punish new accounts">
-        Whether to punish new accounts that join the server.
-        <CodeGroup>
-        ```javascript Syntax
-        --punish (true | false)
-        ```
+Omex services and materials are provided “as is”. Omex makes no warranties, expressed or implied, and disclaims all other warranties, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other rights.
 
-        ```javascript Example
-        --punish true
-        ```
-        </CodeGroup>
-    </Accordion>
+- Services will be accurate, reliable, or error-free.
+- Results from using Omex will meet any specific expectations.
+- Services will always operate without interruption or security risks.
 
-</AccordionGroup>
-<Frame>
-  <img src="/images/security/antiraid/massjoin.png" />
-</Frame>
+## **4. Limitations of Liability**
 
-### Requiring an avatar
+In no event shall Omex, its developers, or suppliers be liable for any damages (including, without limitation, loss of data, loss of profits, or business interruptions) arising from the use or inability to use its services.
 
-This module will trigger when an account joins the server without an avatar.
+Even if Omex has been informed of the possibility of such damages, liability remains strictly limited. Some jurisdictions do not allow limitations on implied warranties or liability for incidental or consequential damages, so these limitations may not apply in certain cases.
 
-<CodeGroup>
-```javascript Syntax
-,antiraid avatar (on or off) [--do (action)]
-```
+## **5. Accuracy of Information**
 
-```javascript Example
-,antiraid avatar on --do kick
-```
+The materials provided by Omex may include technical, typographical, or photographic errors. Omex does not guarantee that its materials are accurate, complete, or up-to-date.
 
-</CodeGroup>
-<br />
-<AccordionGroup>
-    <Accordion title="Punishment">
-        The action which will be taken when the threshold is reached.
-        <Info>Available actions are `ban` and `kick`.</Info>
-        <CodeGroup>
-        ```javascript Syntax
-        --do (action)
-        ```
+Omex may make changes to its materials or services at any time without notice. However, there is no obligation to update or maintain them.
 
-        ```javascript Example
-        --do ban
-        ```
-        </CodeGroup>
-    </Accordion>
+## **6. Modifications to Terms**
 
-</AccordionGroup>
-<Frame>
-  <img src="/images/security/antiraid/avatar.png" />
-</Frame>
+Omex reserves the right to revise or update these Terms of Service at any time, without prior notice. By continuing to access or use the Bot or website, you agree to be bound by the most recent version of these Terms.
 
-### Setting a minimum account age
+## **7. Governing Law**
 
-This module will trigger when an account joins the server that is younger than the specified age.
+These Terms of Service are governed by and construed in accordance with the laws of England and Wales. By using Omex, you irrevocably submit to the exclusive jurisdiction of the courts of England and Wales.
 
-<Info>
-  The `threshold` flag is the numbers of days for an account to be considered
-  old enough.
-</Info>
+## **⚖️ Summary**
 
-<CodeGroup>
-```javascript Syntax
-,antiraid age (on or off) [--threshold (number)] [--do (action)]
-```
-
-```javascript Example
-,antiraid age on --threshold 7 --do ban
-```
-
-</CodeGroup>
-<br />
-<AccordionGroup>
-    <Accordion title="Threshold">
-        The threshold is the number of accounts that can join the server within the time frame.
-        <Info>It's recommended to keep the threshold between `5` and `10` to stay safe.</Info>
-        <CodeGroup>
-        ```javascript Syntax
-        --threshold (number)
-        ```
-
-        ```javascript Example
-        --threshold 5
-        ```
-        </CodeGroup>
-    </Accordion>
-    <Accordion title="Punishment">
-        The action which will be taken when the threshold is reached.
-        <Info>Available actions are `ban` and `kick`.</Info>
-        <CodeGroup>
-        ```javascript Syntax
-        --do (action)
-        ```
-
-        ```javascript Example
-        --do ban
-        ```
-        </CodeGroup>
-    </Accordion>
-
-</AccordionGroup>
-<Frame>
-  <img src="/images/security/antiraid/age.png" />
-</Frame>
-
-### Exempting accounts from the antiraid
-
-You can exempt accounts from the antiraid with the `antiraid whitelist` command.
-
-<Info>You can use the `antiraid whitelist view` command to view all whitelisted accounts.</Info>
-<CodeGroup>
-```javascript Syntax
-,antiraid whitelist (user)
-```
-
-```javascript Example
-,antiraid whitelist @jonathan
-```
-
-</CodeGroup>
-<br />
-<Frame>
-  <img src="/images/security/antiraid/whitelist.png" />
-</Frame>
-
-## Viewing the antiraid configuration
-
-You can use the `antiraid config` command to view the current antiraid configuration.
-
-<Frame>
-  <img src="/images/security/antiraid/config.png" />
-</Frame>
-
-## What to do after a raid
-
-<Steps>
-    <Step title="Cleaning up">
-        After a raid, it's recommended to clean up the server by removing all the accounts that joined during the raid, you can do this with the `recentban` and `raid` commands.
-
-        <Info>
-        The `duration` parameter must use the proper format, you can learn more
-        [here](/resources/syntax#formatting-a-duration).
-        </Info>
-        <CodeGroup>
-        ```javascript Syntax
-        ,recentban (amount) <reason>
-        ,raid (duration) (kick or ban) <reason>
-        ```
-
-        ```javascript Example
-        ,recentban 50 // Bans the last 50 accounts that joined the server
-        ,raid 2h ban // Bans all accounts that joined the server in the last 2 hours
-        ```
-        </CodeGroup>
-    </Step>
-    <Step title="Disabling the raid state">
-        After the raid is over, you can disable the raid state with the `antiraid state` command, this will re-enable events, unlock channels, and allow accounts to join the server.
-    </Step>
-
-</Steps>
+By accessing or using Omex, you agree to comply with these Terms. If you do not accept them, you may not use the Bot, website, or services.
