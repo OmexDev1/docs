@@ -2,8 +2,10 @@
 
 This repository contains Omex's documentation that can be found [here](https://docs.Omex.bot/).
 
-We welcome new contributions. Please create a [Pull Request](https://github.com/ju/docs/pulls) if you would like to contribute to our documentation. For new contributors, we advise you to familiarize yourself with [MDX](https://mintlify.com/docs/page) and see [Contributing.md](https://github.com/ju/docs/blob/main/CONTRIBUTING.md) before requesting any changes.
+We welcome new contributions. If you would like to contribute, please create a
+[Pull Request](https://github.com/OmexDev1/docs/pulls).
 
 ## Join our community
 
-You can find the rest of us in Omex's official [Discord Server](https://discord.gg/Omex).
+You can find the rest of us in Omex's official
+[Discord Server](https://discord.gg/thbuzS7BxK).
