@@ -12,17 +12,21 @@
     "groups": [
       {
         "group": "Overview",
-        "pages": [
-          "overview/introduction",
-          "overview/premium"
-        ]
+        "pages": ["overview/introduction", "overview/premium"]
       },
       {
         "group": "Security Setup",
-        "pages": [
-          "security/antinuke",
-          "security/antiraid",
-          "security/fake-permissions"
+        "pages": ["security/antinuke"]
+      }
+    ],
+    "tabs": [
+      {
+        "tab": "Legal",
+        "groups": [
+          {
+            "group": "Legal",
+            "pages": ["legal/tos", "legal/privacypolicy"]
+          }
         ]
       }
     ]
