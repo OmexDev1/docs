@@ -313,72 +313,67 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
   <Accordion title="Threshold">
     Number of actions allowed in a **10 second** window before AntiNuke triggers.
 
-    ````
     <Info>
       Recommended:
+
       - **1–2** for destructive actions (deletions, dangerous permissions)
       - **2–4** for creation spam (channels/roles)
       - **3–5** for mentions
     </Info>
-    
     <CodeGroup>
-    
+
     ```javascript Syntax
     --threshold (number)
     ```
+
     
     ```javascript Example
     --threshold 3
     ```
-    
+
     </CodeGroup>
-    ````
   </Accordion>
   <Accordion title="Punishment">
     Action taken against the actor when the module triggers.
 
-    ````
     <Info>
       Punishments:
+
       - `ban`
       - `kick`
       - `stripstaff` (removes staff roles the bot is allowed to remove)
     </Info>
-    
     <CodeGroup>
-    
+
     ```javascript Syntax
     --do (punishment)
     ```
+
     
     ```javascript Example
     --do stripstaff
     ```
-    
+
     </CodeGroup>
-    ````
   </Accordion>
   <Accordion title="Command detection">
     Stored in configuration as `command: true/false`.
 
-    ````
     <Info>
-      In this code, triggers rely on audit logs and events, not command parsing.
-      Keep it enabled for consistency with your config schema.
+      In this code, triggers rely on audit logs and events, not command parsing. Keep it enabled for consistency with your config schema.
     </Info>
-    
     <CodeGroup>
-    
+
     ```javascript Syntax
     --command (true | false)
     ```
+
     
     ```javascript Example
     --command true
     ```
-    
+
     </CodeGroup>
-    ````
   </Accordion>
 </AccordionGroup>
 
@@ -390,157 +385,134 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
   <Accordion title="Mass ban">
     Triggers on `on_member_ban` and checks audit logs for who banned.
 
-    ````
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke ban (on or off) --threshold (number) --do (punishment) --command (true | false)
     ```
+
     
     ```javascript Example
     ,antinuke ban on --threshold 3 --do ban --command true
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/ban.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
   <Accordion title="Mass kick">
     Triggers on `on_member_remove` and checks audit logs for kick actions.
 
-    ````
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke kick (on or off) --threshold (number) --do (punishment) --command (true | false)
     ```
+
     
     ```javascript Example
     ,antinuke kick on --threshold 3 --do ban --command true
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/kick.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
   <Accordion title="Channel creation">
     Triggers on `on_guild_channel_create`. If it triggers, it punishes the actor and deletes the created channel.
 
-    ````
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke channelcreation (on or off) --threshold (number) --do (punishment)
     ```
+
     
     ```javascript Example
     ,antinuke channelcreation on --threshold 2 --do stripstaff
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/channelcreation.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
   <Accordion title="Channel deletion">
     Triggers on `on_guild_channel_delete`. Punishes/logs on threshold.
 
-    ````
     <Warning>
       Deleted channels cannot be automatically restored.
     </Warning>
-    
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke channeldeletion (on or off) --threshold (number) --do (punishment)
     ```
+
     
     ```javascript Example
     ,antinuke channeldeletion on --threshold 1 --do ban
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/channeldeletion.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
   <Accordion title="Role creation">
     Triggers on `on_guild_role_create`. If it triggers, it punishes the actor and deletes the created role.
 
-    ````
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke rolecreation (on or off) --threshold (number) --do (punishment)
     ```
+
     
     ```javascript Example
     ,antinuke rolecreation on --threshold 2 --do stripstaff
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/rolecreation.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
   <Accordion title="Role deletion">
     Triggers on `on_guild_role_delete`. Punishes/logs on threshold.
 
-    ````
     <Warning>
       Deleted roles cannot be automatically restored.
     </Warning>
-    
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke roledeletion (on or off) --threshold (number) --do (punishment)
     ```
+
     
     ```javascript Example
     ,antinuke roledeletion on --threshold 1 --do ban
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/roledeletion.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
   <Accordion title="Webhooks">
     Triggers on `on_webhooks_update`. Looks for webhook create/delete/update in audit logs. If it triggers and the bot has `Manage Webhooks`, it deletes webhooks in that channel.
 
-    ````
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke webhooks (on or off) --threshold (number) --do (punishment)
     ```
+
     
     ```javascript Example
     ,antinuke webhooks on --threshold 1 --do ban
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/webhooks.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
   <Accordion title="Mass mentions">
     Triggers on `on_message`. Counts mentions in each message:
@@ -549,58 +521,53 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
     - user mentions add **1 each**
     - role mentions add **1 each**
 
-    ````
-    If the message includes any mentions, it caches the message ID.
-    When threshold triggers, it deletes cached mention messages from the last 10 seconds and punishes/logs.
-    
+    If the message includes any mentions, it caches the message ID. When threshold triggers, it deletes cached mention messages from the last 10 seconds and punishes/logs.
+
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke mentions (on or off) --threshold (number) --do (punishment)
     ```
+
     
     ```javascript Example
     ,antinuke mentions on --threshold 3 --do stripstaff
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/mentions.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
   <Accordion title="Dangerous permissions">
     This module covers TWO cases:
 
-    ````
     **1) Role permission escalation**
+
     - Event: `on_guild_role_update(before, after)`
     - If dangerous permissions were ADDED, it finds who did it via audit logs.
     - If threshold triggers, it reverts the role permissions back to `before.permissions` and punishes/logs.
-    
+
     **2) Dangerous role granted to a member**
+
     - Event: `on_member_update(before, after)`
     - Detects newly added roles on the member.
     - If any added role has dangerous permissions, it finds the actor via audit logs.
     - If threshold triggers, it removes the dangerous roles from the target member and punishes/logs.
-    
+
     <CodeGroup>
-    
+
     ```javascript Syntax
     ,antinuke permissions (on or off) --threshold (number) --do (punishment)
     ```
+
     
     ```javascript Example
     ,antinuke permissions on --threshold 1 --do ban
     ```
-    
+
     </CodeGroup>
-    
-    <Frame>
-      <img src="/images/security/antinuke/permissions.png" alt="" style={{ width:"100%" }} />
-    </Frame>
-    ````
+
+    {/* images removed from Modules section */}
   </Accordion>
 </AccordionGroup>
 
