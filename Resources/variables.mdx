@@ -3,7 +3,8 @@
 title: "Variables"
 description: "All available variables within Omex"
 icon: "signature"
------------------
+---
+
 
 These variables are accessible throughout Omex and can be used
 in any command context which contains a `message` or `embed code` parameter (e.g. `welcome`, `leave`, and `goodbye`).
@@ -75,5 +76,4 @@ These variables are available only in Last.fm now-playing contexts and are retur
 ## Notes
 
 * Unknown variables are left **unchanged**. For example, `{something.that.does.not.exist}` will remain exactly as written.
-* Tokens are matched using the pattern `\{([a-zA-Z0-9_.]+)\}` — only letters, numbers, underscores, and dots are valid inside `{}`.
 * Variable availability depends on command context (e.g. Last.fm variables only exist in now-playing templates).
