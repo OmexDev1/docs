@@ -1,0 +1,79 @@
+---
+
+title: "Variables"
+description: "All available variables within Omex"
+icon: "signature"
+-----------------
+
+These variables are accessible throughout Omex and can be used
+in any command context which contains a `message` or `embed code` parameter (e.g. `welcome`, `leave`, and `goodbye`).
+
+<Tabs>
+  <Tab title="User">
+
+| Variable         | Output                 |
+| ---------------- | ---------------------- |
+| `{user}`         | Author display name    |
+| `{user.name}`    | Author username        |
+| `{user.id}`      | Author user ID         |
+| `{user.mention}` | Mention for the author |
+| `{user.tag}`     | Author tag string      |
+
+  </Tab>
+
+  <Tab title="Guild">
+
+| Variable               | Output             |
+| ---------------------- | ------------------ |
+| `{guild.name}`         | Guild name         |
+| `{guild.id}`           | Guild ID           |
+| `{guild.member_count}` | Guild member count |
+
+<Info>
+The resolver exposes the full `guild` object for dotted lookups. Any attribute that exists on the guild can be accessed using `{guild.<attribute>}`.
+</Info>
+
+  </Tab>
+
+  <Tab title="Channel">
+
+| Variable            | Output          |
+| ------------------- | --------------- |
+| `{channel.name}`    | Channel name    |
+| `{channel.id}`      | Channel ID      |
+| `{channel.mention}` | Channel mention |
+
+<Info>
+The resolver exposes the full `channel` object for dotted lookups. Any attribute that exists on the channel can be accessed using `{channel.<attribute>}`.
+</Info>
+
+  </Tab>
+
+  <Tab title="Last.fm (Now Playing)">
+
+These variables are available only in Last.fm now-playing contexts and are returned by the internal now-playing resolver.
+
+| Variable            | Output                                       |
+| ------------------- | -------------------------------------------- |
+| `{track.name}`      | Track name                                   |
+| `{track.url}`       | Track URL                                    |
+| `{track.playcount}` | Track playcount (or `N/A` if unavailable)    |
+| `{track.image}`     | Track image URL (or `N/A` if unavailable)    |
+| `{artist.name}`     | Artist name                                  |
+| `{artist.url}`      | Artist URL                                   |
+| `{album.name}`      | Album name                                   |
+| `{album.url}`       | Album URL                                    |
+| `{album.playcount}` | Album playcount (or `N/A` if unavailable)    |
+| `{album.cover}`     | Album cover URL (or `N/A` if unavailable)    |
+| `{user.name}`       | Last.fm username                             |
+| `{user.id}`         | Last.fm user ID (or `N/A` if unavailable)    |
+| `{user.avatar}`     | Last.fm avatar URL (or `N/A` if unavailable) |
+
+  </Tab>
+</Tabs>
+
+## Notes
+
+* Unknown variables are left **unchanged**. For example, `{something.that.does.not.exist}` will remain exactly as written.
+* Tokens are matched using the pattern `\{([a-zA-Z0-9_.]+)\}` — only letters, numbers, underscores, and dots are valid inside `{}`.
+* Variable availability depends on command context (e.g. Last.fm variables only exist in now-playing templates).
