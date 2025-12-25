@@ -12,14 +12,14 @@ An antinuke system helps protect your server from destructive actions performed 
 
 This system is **audit-log + rate-limit** based.
 
-1. **A server event happens** (e.g. channel created, role deleted, member banned).
+1. **A server event happens** (e.g. channel created. role deleted. member banned).
 2. The bot **reads the Audit Log** to determine **who** performed the action.
 3. The bot checks if the actor is **bypassed** (owner/whitelisted).
 4. A **ratelimiter** tracks how many actions that actor has done within **10 seconds**.
-5. If the actor exceeds the configured **threshold**, AntiNuke:
+5. If the actor exceeds the configured **threshold**. AntiNuke:
    - **Logs** an alert to your configured log channel (if enabled)
-   - **Punishes** the actor (`ban`, `kick`, or `stripstaff`)
-   - **Reverts** what it can (e.g. deletes newly-created channels/roles, reverts permission escalation, deletes mention spam messages)
+   - **Punishes** the actor (`ban`. `kick`. or `stripstaff`)
+   - **Reverts** what it can (e.g. deletes newly-created channels/roles. reverts permission escalation. deletes mention spam messages)
 
 ### What it can and cannot revert
 
@@ -56,18 +56,18 @@ AntiNuke relies heavily on audit logs and moderation permissions. Recommended pe
 - **Read Message History** _(for mention spam deletion)_
 - **Manage Messages** _(helps with deleting mention messages)_
 
-> If your bot does not have a required permission, that module may silently fail to punish/revert.
+> If your bot does not have a required permission. that module may silently fail to punish/revert.
 
 ---
 
 ## Quick setup
 
 1. Invite the bot with the permissions above.
-2. Enable Antinuke: `,antinuke on`
-3. Set a log channel: `,antinuke logchannel #logs`
-4. Add trusted Antinuke admins (optional): `,antinuke admin @user`
+2. Enable Antinuke: `.antinuke on`
+3. Set a log channel: `.antinuke logchannel #logs`
+4. Add trusted Antinuke admins (optional): `.antinuke admin @user`
 5. Configure modules (recommended set below).
-6. Verify config: `,antinuke configuration`
+6. Verify config: `.antinuke configuration`
 
 ---
 
@@ -78,12 +78,12 @@ AntiNuke relies heavily on audit logs and moderation permissions. Recommended pe
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke on
+.antinuke on
 ```
 
 
 ```javascript Example
-,antinuke on
+.antinuke on
 ```
 
 </CodeGroup>
@@ -105,12 +105,12 @@ This disables AntiNuke and resets the stored configuration.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke off
+.antinuke off
 ```
 
 
 ```javascript Example
-,antinuke off
+.antinuke off
 ```
 
 </CodeGroup>
@@ -130,12 +130,12 @@ This disables AntiNuke and resets the stored configuration.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke logchannel (#channel)
+.antinuke logchannel (#channel)
 ```
 
 
 ```javascript Example
-,antinuke logchannel #security-logs
+.antinuke logchannel #security-logs
 ```
 
 </CodeGroup>
@@ -145,12 +145,12 @@ This disables AntiNuke and resets the stored configuration.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke logchannel
+.antinuke logchannel
 ```
 
 
 ```javascript Example
-,antinuke logchannel
+.antinuke logchannel
 ```
 
 </CodeGroup>
@@ -180,12 +180,12 @@ The server owner can toggle AntiNuke Admin on a member.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke admin (user)
+.antinuke admin (user)
 ```
 
 
 ```javascript Example
-,antinuke admin @aj.wtf
+.antinuke admin @aj.wtf
 ```
 
 </CodeGroup>
@@ -205,12 +205,12 @@ The server owner can toggle AntiNuke Admin on a member.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke admins
+.antinuke admins
 ```
 
 
 ```javascript Example
-,antinuke admins
+.antinuke admins
 ```
 
 </CodeGroup>
@@ -236,12 +236,12 @@ Whitelisted users do not trigger antinuke punishments.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke whitelist (user)
+.antinuke whitelist (user)
 ```
 
 
 ```javascript Example
-,antinuke whitelist @jonathan
+.antinuke whitelist @jonathan
 ```
 
 </CodeGroup>
@@ -261,12 +261,12 @@ Whitelisted users do not trigger antinuke punishments.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke unwhitelist (user)
+.antinuke unwhitelist (user)
 ```
 
 
 ```javascript Example
-,antinuke unwhitelist @jonathan
+.antinuke unwhitelist @jonathan
 ```
 
 </CodeGroup>
@@ -276,12 +276,12 @@ Whitelisted users do not trigger antinuke punishments.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke whitelisted
+.antinuke whitelisted
 ```
 
 
 ```javascript Example
-,antinuke whitelisted
+.antinuke whitelisted
 ```
 
 </CodeGroup>
@@ -303,7 +303,7 @@ Whitelisted users do not trigger antinuke punishments.
 Modules are configured per feature (ban/kick/channelcreation/etc). Each module is stored with:
 
 - `status` (on/off)
-- `punishment` (`ban`, `kick`, `stripstaff`)
+- `punishment` (`ban`. `kick`. `stripstaff`)
 - `threshold` (1–12)
 - `command` (true/false) _(stored; your listeners are audit-log based)_
 
@@ -316,7 +316,7 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
     <Info>
       Recommended:
 
-      - **1–2** for destructive actions (deletions, dangerous permissions)
+      - **1–2** for destructive actions (deletions. dangerous permissions)
       - **2–4** for creation spam (channels/roles)
       - **3–5** for mentions
     </Info>
@@ -360,7 +360,7 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
     Stored in configuration as `command: true/false`.
 
     <Info>
-      In this code, triggers rely on audit logs and events, not command parsing. Keep it enabled for consistency with your config schema.
+      In this code. triggers rely on audit logs and events. not command parsing. Keep it enabled for consistency with your config schema.
     </Info>
     <CodeGroup>
 
@@ -385,7 +385,7 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
 Modules are configured per feature (ban/kick/channelcreation/etc). Each module is stored with:
 
 - `status` (on/off)
-- `punishment` (`ban`, `kick`, `stripstaff`)
+- `punishment` (`ban`. `kick`. `stripstaff`)
 - `threshold` (1–12)
 - `command` (true/false) *(stored; your listeners are audit-log based)*
 
@@ -397,7 +397,7 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
 
     <Info>
       Recommended:
-      - **1–2** for destructive actions (deletions, dangerous permissions)
+      - **1–2** for destructive actions (deletions. dangerous permissions)
       - **2–4** for creation spam (channels/roles)
       - **3–5** for mentions
     </Info>
@@ -438,7 +438,7 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
     Stored in configuration as `command: true/false`.
 
     <Info>
-      In this code, triggers rely on audit logs and events, not command parsing.
+      In this code. triggers rely on audit logs and events. not command parsing.
       Keep it enabled for consistency with your config schema.
     </Info>
 
@@ -464,11 +464,11 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke ban (on or off) --threshold (number) --do (punishment) --command (true | false)
+      .antinuke ban (on or off) --threshold (number) --do (punishment) --command (true | false)
       ```
 
       ```javascript Example
-      ,antinuke ban on --threshold 3 --do ban --command true
+      .antinuke ban on --threshold 3 --do ban --command true
       ```
     </CodeGroup>
 
@@ -480,11 +480,11 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke kick (on or off) --threshold (number) --do (punishment) --command (true | false)
+      .antinuke kick (on or off) --threshold (number) --do (punishment) --command (true | false)
       ```
 
       ```javascript Example
-      ,antinuke kick on --threshold 3 --do ban --command true
+      .antinuke kick on --threshold 3 --do ban --command true
       ```
     </CodeGroup>
 
@@ -492,15 +492,15 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
   </Accordion>
 
   <Accordion title="Channel creation">
-    Triggers on `on_guild_channel_create`. If it triggers, it punishes the actor and deletes the created channel.
+    Triggers on `on_guild_channel_create`. If it triggers. it punishes the actor and deletes the created channel.
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke channelcreation (on or off) --threshold (number) --do (punishment)
+      .antinuke channelcreation (on or off) --threshold (number) --do (punishment)
       ```
 
       ```javascript Example
-      ,antinuke channelcreation on --threshold 2 --do stripstaff
+      .antinuke channelcreation on --threshold 2 --do stripstaff
       ```
     </CodeGroup>
 
@@ -516,11 +516,11 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke channeldeletion (on or off) --threshold (number) --do (punishment)
+      .antinuke channeldeletion (on or off) --threshold (number) --do (punishment)
       ```
 
       ```javascript Example
-      ,antinuke channeldeletion on --threshold 1 --do ban
+      .antinuke channeldeletion on --threshold 1 --do ban
       ```
     </CodeGroup>
 
@@ -528,15 +528,15 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
   </Accordion>
 
   <Accordion title="Role creation">
-    Triggers on `on_guild_role_create`. If it triggers, it punishes the actor and deletes the created role.
+    Triggers on `on_guild_role_create`. If it triggers. it punishes the actor and deletes the created role.
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke rolecreation (on or off) --threshold (number) --do (punishment)
+      .antinuke rolecreation (on or off) --threshold (number) --do (punishment)
       ```
 
       ```javascript Example
-      ,antinuke rolecreation on --threshold 2 --do stripstaff
+      .antinuke rolecreation on --threshold 2 --do stripstaff
       ```
     </CodeGroup>
 
@@ -552,11 +552,11 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke roledeletion (on or off) --threshold (number) --do (punishment)
+      .antinuke roledeletion (on or off) --threshold (number) --do (punishment)
       ```
 
       ```javascript Example
-      ,antinuke roledeletion on --threshold 1 --do ban
+      .antinuke roledeletion on --threshold 1 --do ban
       ```
     </CodeGroup>
 
@@ -565,15 +565,15 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
 
   <Accordion title="Webhooks">
     Triggers on `on_webhooks_update`. Looks for webhook create/delete/update in audit logs.
-    If it triggers and the bot has `Manage Webhooks`, it deletes webhooks in that channel.
+    If it triggers and the bot has `Manage Webhooks`. it deletes webhooks in that channel.
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke webhooks (on or off) --threshold (number) --do (punishment)
+      .antinuke webhooks (on or off) --threshold (number) --do (punishment)
       ```
 
       ```javascript Example
-      ,antinuke webhooks on --threshold 1 --do ban
+      .antinuke webhooks on --threshold 1 --do ban
       ```
     </CodeGroup>
 
@@ -586,16 +586,16 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
     - user mentions add **1 each**
     - role mentions add **1 each**
 
-    If the message includes any mentions, it caches the message ID.
-    When threshold triggers, it deletes cached mention messages from the last 10 seconds and punishes/logs.
+    If the message includes any mentions. it caches the message ID.
+    When threshold triggers. it deletes cached mention messages from the last 10 seconds and punishes/logs.
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke mentions (on or off) --threshold (number) --do (punishment)
+      .antinuke mentions (on or off) --threshold (number) --do (punishment)
       ```
 
       ```javascript Example
-      ,antinuke mentions on --threshold 3 --do stripstaff
+      .antinuke mentions on --threshold 3 --do stripstaff
       ```
     </CodeGroup>
 
@@ -606,23 +606,23 @@ Modules are configured per feature (ban/kick/channelcreation/etc). Each module i
     This module covers TWO cases:
 
     **1) Role permission escalation**
-    - Event: `on_guild_role_update(before, after)`
-    - If dangerous permissions were ADDED, it finds who did it via audit logs.
-    - If threshold triggers, it reverts the role permissions back to `before.permissions` and punishes/logs.
+    - Event: `on_guild_role_update(before. after)`
+    - If dangerous permissions were ADDED. it finds who did it via audit logs.
+    - If threshold triggers. it reverts the role permissions back to `before.permissions` and punishes/logs.
 
     **2) Dangerous role granted to a member**
-    - Event: `on_member_update(before, after)`
+    - Event: `on_member_update(before. after)`
     - Detects newly added roles on the member.
-    - If any added role has dangerous permissions, it finds the actor via audit logs.
-    - If threshold triggers, it removes the dangerous roles from the target member and punishes/logs.
+    - If any added role has dangerous permissions. it finds the actor via audit logs.
+    - If threshold triggers. it removes the dangerous roles from the target member and punishes/logs.
 
     <CodeGroup>
       ```javascript Syntax
-      ,antinuke permissions (on or off) --threshold (number) --do (punishment)
+      .antinuke permissions (on or off) --threshold (number) --do (punishment)
       ```
 
       ```javascript Example
-      ,antinuke permissions on --threshold 1 --do ban
+      .antinuke permissions on --threshold 1 --do ban
       ```
     </CodeGroup>
 
@@ -638,11 +638,11 @@ Shows AntiNuke enabled status + each module state and parameters.
 
 <CodeGroup>
   ```javascript Syntax
-  ,antinuke configuration
+  .antinuke configuration
 ````
 
 ```javascript Example
-,antinuke configuration
+.antinuke configuration
 ```
 
 </CodeGroup>
@@ -666,12 +666,12 @@ Shows AntiNuke enabled status + each module state and parameters.
 <CodeGroup>
 
 ```javascript Syntax
-,antinuke configuration
+.antinuke configuration
 ```
 
 
 ```javascript Example
-,antinuke configuration
+.antinuke configuration
 ```
 
 </CodeGroup>
@@ -693,7 +693,7 @@ Shows AntiNuke enabled status + each module state and parameters.
 ### Nothing triggers
 
 - Ensure the bot has **View Audit Log**
-- Ensure AntiNuke is enabled: `,antinuke configuration`
+- Ensure AntiNuke is enabled: `.antinuke configuration`
 - Ensure the specific module is enabled (shows ✅)
 - Ensure the bot’s role is high enough to punish/remove roles
 - Check your log channel is set properly
@@ -707,7 +707,7 @@ Shows AntiNuke enabled status + each module state and parameters.
 
 - Ensure **Message Content** intent is enabled
 - Ensure the bot can read messages in the channels
-- Ensure the module is enabled: `,antinuke mentions on ...`
+- Ensure the module is enabled: `.antinuke mentions on ...`
 
 ---
 
