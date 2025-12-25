@@ -67,7 +67,7 @@
     "primary": {
       "type": "button",
       "label": "Home",
-      "href": "https://Omex.bot"
+      "href": "https://Omex.live"
     }
   },
   "seo": {
@@ -79,26 +79,9 @@
   },
   "footer": {
     "socials": {
-      "discord": "https://discord.gg/Omex",
-      "github": "https://github.com/ju/docs"
+      "discord": "https://discord.gg/Omex"
     }
   },
   "redirects": [
-    {
-      "source": "/commands",
-      "destination": "https://Omex.bot/commands"
-    },
-    {
-      "source": "/status",
-      "destination": "https://Omex.bot/status"
-    },
-    {
-      "source": "/invite",
-      "destination": "https://Omex.bot/invite"
-    },
-    {
-      "source": "/discord",
-      "destination": "https://discord.gg/Omex"
-    }
   ]
 }
