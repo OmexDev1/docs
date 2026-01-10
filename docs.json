@@ -27,6 +27,12 @@
             ]
           },
           {
+            "group": "Server Configuration",
+            "pages": [
+              "configuration/logging"
+            ]
+          },
+          {
             "group": "Resources",
             "pages": [
               "Resources/Embeds",
