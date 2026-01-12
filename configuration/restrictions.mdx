@@ -1,0 +1,103 @@
+---
+title: "Restrictions"
+description: "Restrict commands to a specific role or channel."
+icon: lock
+---
+
+## Overview
+
+Command restrictions let you **lock a command** so it can only be used:
+
+- by members with a specific **role**, or
+- inside a specific **channel**
+
+Restrictions are stored per-server and applied globally whenever the command is executed.
+
+---
+
+## Restricting a command
+
+Use `restrictcommand`:
+
+<CodeGroup>
+
+```javascript Syntax
+,restrictcommand (#channel|@role) (command)
+```
+
+```javascript Example
+,restrictcommand #mods avatar
+```
+
+</CodeGroup>
+
+### How it behaves
+
+- If you restrict to a **role**, only members with that role can run the command.
+- If you restrict to a **channel**, the command can only be used in that channel.
+- One restriction is stored per command (role *or* channel).
+
+---
+
+## Viewing restricted commands
+
+Use:
+
+<CodeGroup>
+
+```javascript Syntax
+,restrictcommand list
+```
+
+```javascript Example
+,restrictcommand list
+```
+
+</CodeGroup>
+
+---
+
+## Removing a restriction
+
+Use `unrestrictcommand`:
+
+<CodeGroup>
+
+```javascript Syntax
+,unrestrictcommand (command|all)
+```
+
+```javascript Example
+,unrestrictcommand avatar
+```
+
+</CodeGroup>
+
+To clear **all** restrictions in a server:
+
+```javascript
+,unrestrictcommand all
+```
+
+---
+
+## Protected commands
+
+Some commands are “protected” and cannot be restricted/unrestricted to avoid soft-locking critical bot management.
+If you try to restrict one of these, the bot will deny the action.
+
+---
+
+## Troubleshooting
+
+### “unauthorized” / “missing permission”
+Only the bot owner can manage restrictions. Make sure you're using the owner account.
+
+### “The command … does not exist”
+Use the command’s real name (or its qualified name for subcommands).
+
+### A restricted command still runs
+Check:
+- you restricted the correct command name (e.g., the qualified name),
+- the restriction list shows it, and
+- your bot is running the restriction check in `setup_hook` / global checks.
