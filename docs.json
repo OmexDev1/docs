@@ -17,7 +17,7 @@
             "group": "Overview",
             "pages": [
               "overview/introduction",
-              "overview/statistics"
+              "overview/premium"
             ]
           },
           {
@@ -30,7 +30,7 @@
             "group": "Server Configuration",
             "pages": [
               "configuration/logging",
-              "configuration/welcome"
+              "configuration/statistics"
             ]
           },
           {
