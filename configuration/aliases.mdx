@@ -1,0 +1,138 @@
+---
+title: "Aliases"
+description: "Create shortcuts to invoke other commands."
+icon: command
+---
+
+## Overview
+
+Command aliases let you create **shortcuts** that run an existing command (optionally with preset arguments).
+They’re stored per-server, so each guild can have its own alias set.
+
+When an alias is used, the bot rewrites the message content into the target command + arguments, then processes it as if the user typed the full command.
+
+---
+
+## Who can manage aliases?
+
+- **Manage Server** (`Manage Guild`) is required to add/remove/list aliases.
+- Regular members can **use** aliases once they exist (normal command permissions/checks still apply).
+
+---
+
+## Creating an alias
+
+Use `alias add`:
+
+<CodeGroup>
+
+```javascript Syntax
+,alias add (shortcut) (command) [args...]
+```
+
+```javascript Example
+,alias add deport ban
+```
+
+</CodeGroup>
+
+### What gets stored
+
+Each alias stores:
+
+- `alias`: your shortcut name (example: `deport`)
+- `command`: the target command name the bot will run (example: `ban`)
+- `arguments`: optional preset arguments (split by spaces)
+
+---
+
+## Predefined arguments (placeholders)
+
+You can include placeholders inside an alias’s preset arguments:
+
+- `{0}` = first user-provided argument
+- `{1}` = second user-provided argument
+- …and so on
+
+Example:
+
+```javascript
+,alias add shh timeout {0} 10m
+,shh @jonathan
+```
+
+This runs:
+
+- `timeout @jonathan 10m`
+
+### Notes about placeholders
+
+- Placeholder indexing starts at **0**, not 1.
+- If a placeholder refers to an argument the user did not supply, it’s treated as empty and skipped.
+
+---
+
+## Removing an alias
+
+Use `alias remove`:
+
+<CodeGroup>
+
+```javascript Syntax
+,alias remove (shortcut|all)
+```
+
+```javascript Example
+,alias remove deport
+```
+
+</CodeGroup>
+
+To delete **all** aliases in the server:
+
+```javascript
+,alias remove all
+```
+
+---
+
+## Listing aliases
+
+Use `alias list`:
+
+<CodeGroup>
+
+```javascript Syntax
+,alias list
+```
+
+```javascript Example
+,alias list
+```
+
+</CodeGroup>
+
+This shows every alias in the server and what it expands into.
+
+---
+
+## Limits and safeguards
+
+- Servers can create up to **5 aliases** (unless your bot has a hardcoded exception for a specific guild).
+- Aliases cannot conflict with existing command names or built-in aliases.
+- Aliases are cached and refreshed periodically, so changes are fast and consistent.
+
+---
+
+## Troubleshooting
+
+### “Conflicts with an existing command/alias”
+Rename the alias so it doesn’t match any command name or existing alias.
+
+### “No command found with the name …”
+Make sure the target command exists and you typed the correct name.
+
+### Alias runs but the command fails
+That’s normal if:
+- the user lacks permissions for the target command, or
+- the command has other checks (premium, cooldowns, etc.)
