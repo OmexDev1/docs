@@ -30,6 +30,8 @@
             "group": "Server Configuration",
             "pages": [
               "configuration/logging",
+              "configuration/aliases",
+              "configuration/restrictions",
               "configuration/statistics"
             ]
           },
