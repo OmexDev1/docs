@@ -1,0 +1,193 @@
+---
+title: "Statistics"
+description: "Turn channels into live counters (members, bots, boosts, channels, and more)."
+icon: "bar-chart"
+---
+
+## Overview
+
+The **Statistics** module lets you convert a channel into a **live counter** that updates automatically to display key server numbers.
+
+Common counters include:
+
+- Total members
+- Users only / bots only
+- Text / voice channels
+- Categories
+- Boost count
+- Pending members
+- Total channels
+
+Typical channel names look like:
+
+- `Members: 12,367`
+- `Bots: 67`
+- `Text Channels: 128`
+
+---
+
+## How it works
+
+This module is **database-driven** and refreshed using a **scheduled task loop**.
+
+### 1) When you create a counter
+
+When you run:
+
+`statistics set <type> <channel>`
+
+the bot will:
+
+1. Calculate the current value for the chosen counter type.
+2. Rename the selected channel into a counter format (example: `Members: 12,367`).
+3. Store the counter in the database (`counter` collection) using:
+   - `guild_id`
+   - `channel_id`
+   - `option` (the counter type)
+   - `last_update`
+
+Only **one counter per type per server** is stored.  
+Example: you can’t set two separate `members` counters in the same server.
+
+---
+
+## Automatic updates
+
+Every ~10 minutes, the bot:
+
+1. Loads counter entries that are due for refresh.
+2. Checks the guild and channel still exist.
+3. Recomputes the latest value.
+4. Updates the channel name if needed.
+5. Handles Discord edit rate limits by deferring updates when necessary.
+6. Removes invalid entries automatically (deleted channels, missing data, invalid option types).
+
+This keeps your counters reliable over time without manual cleanup.
+
+---
+
+## Requirements
+
+### Permissions (bot)
+
+To rename channels, the bot needs:
+
+- **Manage Channels**
+- **View Channel**
+
+If you use counters on private channels, ensure the bot has access to those channels too.
+
+### Permissions (user)
+
+To configure counters, the user needs:
+
+- **Manage Channels**
+
+### Premium requirement
+
+This module is gated behind `@premium_guild()`.
+
+If the server is not premium, Statistics commands will be blocked.
+
+---
+
+## Commands
+
+### Base command
+
+The base command is:
+
+- `statistics` (aliases: `counter`, `stats`)
+
+If used without a subcommand, it shows help.
+
+---
+
+### Create a counter
+
+<CodeGroup>
+
+```bash Syntax
+statistics set <type> <channel>
+```
+
+```bash Example
+statistics set members #members
+```
+
+</CodeGroup>
+
+---
+
+### Remove a counter from a channel
+
+<CodeGroup>
+
+```bash Syntax
+statistics remove <channel>
+```
+
+```bash Example
+statistics remove #members
+```
+
+</CodeGroup>
+
+---
+
+### List all counters
+
+<CodeGroup>
+
+```bash Syntax
+statistics list
+```
+
+```bash Example
+statistics list
+```
+
+</CodeGroup>
+
+This displays all counters configured in the server.
+
+---
+
+### Clear all counters
+
+<CodeGroup>
+
+```bash Syntax
+statistics clear
+```
+
+```bash Example
+statistics clear
+```
+
+</CodeGroup>
+
+This prompts for confirmation, then removes **all** counters for the server.
+
+---
+
+## Supported counter types
+
+- `members`
+- `users_only`
+- `bots_only`
+- `pending_members`
+- `boosts`
+- `all_channels`
+- `text_channels`
+- `voice_channels`
+- `categories`
+- `announcement_channels`
+
+---
+
+## Notes & limitations
+
+- Counters update on a schedule (not instant live updates).
+- Channel rename operations are rate-limited by Discord; the module automatically delays updates if it hits limits.
+- If a counter channel is deleted, the module removes the saved counter entry automatically.
