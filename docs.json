@@ -31,7 +31,9 @@
             "pages": [
               "configuration/logging",
               "configuration/aliases",
+              "configuration/customization",
               "configuration/restrictions",
+
               "configuration/statistics"
             ]
           },
