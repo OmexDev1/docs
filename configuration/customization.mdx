@@ -1,0 +1,173 @@
+---
+title: "Customization"
+description: "Customize Omex's avatar, banner, and bio"
+icon: paintbrush
+---
+
+## Overview
+
+Personalize Omex’s appearance in your server by setting a custom avatar, banner, or bio
+
+<Warning>
+  This feature is actively monitored and logged. Uploading inappropriate content can lead to removal of Omex from your server and loss of access
+</Warning>
+
+<Info>
+  This feature is premium only and requires **Manage Server**
+</Info>
+
+---
+
+## Customizing Omex’s avatar
+
+Set a custom avatar for Omex in your server
+
+<CodeGroup>
+
+```javascript Syntax
+customize avatar set [image URL]
+````
+
+```javascript Example
+customize avatar set https://omex.live/avatar.png
+```
+
+```javascript Syntax (attachment)
+customize avatar set
+```
+
+```javascript Example (attachment)
+customize avatar set
+// attach an image to the message
+```
+
+</CodeGroup>
+
+---
+
+## Resetting Omex’s avatar
+
+Reset Omex back to its global avatar
+
+<CodeGroup>
+
+```javascript Syntax
+customize avatar reset
+```
+
+```javascript Example
+customize avatar reset
+```
+
+</CodeGroup>
+
+---
+
+## Customizing Omex’s banner
+
+Set a custom banner for Omex in your server
+
+<CodeGroup>
+
+```javascript Syntax
+customize banner set [image URL]
+```
+
+```javascript Example
+customize banner set https://omex.live/banner.png
+```
+
+```javascript Syntax (attachment)
+customize banner set
+```
+
+```javascript Example (attachment)
+customize banner set
+// attach an image to the message
+```
+
+</CodeGroup>
+
+---
+
+## Resetting Omex’s banner
+
+Reset Omex back to its global banner
+
+<CodeGroup>
+
+```javascript Syntax
+customize banner reset
+```
+
+```javascript Example
+customize banner reset
+```
+
+</CodeGroup>
+
+---
+
+## Customizing Omex’s bio
+
+Set a custom bio for Omex in your server
+
+<Info>
+  Max bio length is 500 characters
+</Info>
+
+<CodeGroup>
+
+```javascript Syntax
+customize bio set (text)
+```
+
+```javascript Example
+customize bio set welcome to our server, enjoy your stay
+```
+
+</CodeGroup>
+
+---
+
+## Viewing your server bio
+
+Shows the bio currently set for your server
+
+<CodeGroup>
+
+```javascript Syntax
+customize bio show
+```
+
+```javascript Example
+customize bio show
+```
+
+</CodeGroup>
+
+---
+
+## Resetting Omex’s bio
+
+Clear the bio for your server
+
+<CodeGroup>
+
+```javascript Syntax
+customize bio reset
+```
+
+```javascript Example
+customize bio reset
+```
+
+</CodeGroup>
+
+---
+
+## Notes
+
+* You can upload images as attachments or provide a direct image URL
+* Max image size is 10MB
+* This feature only works in servers with premium active
