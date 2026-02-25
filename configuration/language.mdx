@@ -1,0 +1,113 @@
+---
+title: "Languages"
+description: "Configure Omex's language settings and contribute translations"
+icon: globe
+---
+
+## Overview
+
+Omex supports multiple languages so users and communities worldwide can use the bot comfortably. Language preferences can be set per-user or per-server and are applied immediately where supported
+
+## Supported Languages
+
+Currently supported languages include English (`en`) and Español (`es`). English is the default fallback for any untranslated text
+
+New languages are added over time as community contributions arrive
+
+## Commands
+
+The `language` command group (aliases: `lang`, `locale`) lets users view and manage language preferences. Replace the example prefix below with your server's configured prefix (many examples use `,`)
+
+### View language info
+
+<CodeGroup>
+
+```javascript Syntax
+,language
+```
+
+```javascript Example
+,language
+```
+
+</CodeGroup>
+
+### Set personal language
+
+<CodeGroup>
+
+```javascript Syntax
+,language set <language_code>
+```
+
+```javascript Example
+,language set es
+```
+
+</CodeGroup>
+
+### Reset personal language
+
+<CodeGroup>
+
+```javascript Syntax
+,language reset
+```
+
+```javascript Example
+,language reset
+```
+
+</CodeGroup>
+
+### Server default language (admin)
+
+<CodeGroup>
+
+```javascript Syntax
+,language server          # view current server language
+,language server <code>   # set server language
+```
+
+```javascript Example
+,language server
+,language server en
+```
+
+</CodeGroup>
+
+Personal settings override server defaults. Server defaults apply only to members who have not set a personal language.
+
+## Personal vs Server Language
+
+Omex determines which language to use in this order
+
+1. Personal language (if set)
+2. Server default language (if set)
+3. English (fallback)
+
+Personal preferences override the server default. Server defaults apply only to members who have not set a personal language
+
+Server language changes require the `Manage Server` permission
+
+## Contributing Translations
+
+Translations are community driven. If you want to contribute a new language or improve existing translations, please go to the Omex-locales repository on GitHub to submit changes
+
+Guidelines for contributors:
+
+- Fork the repository and create a new file based on the English base (`en.json`)
+- Keep the message keys unchanged
+- Preserve placeholders such as `{user}`, `{guild}`, and `{count}` exactly
+- Make sure translations are natural and grammatically correct
+- Submit a pull request for review
+
+Small fixes (grammar, clarity, wording) are always welcome and help the bot reach more users
+
+## Notes & Troubleshooting
+
+- If some messages remain in English, that part may not be translated yet
+- Use the language code that matches the translation file you want (for example, `en`, `es`)
+- New translations are reviewed before being added to the official set
+
+If you'd like help contributing, visit the [Omex-locales repository on GitHub](https://github.com/OmexDev1/Omex-locales)
