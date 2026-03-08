@@ -34,8 +34,8 @@
               "configuration/aliases",
               "configuration/customization",
               "configuration/restrictions",
-
-              "configuration/statistics"
+              "configuration/statistics",
+              "configuration/bump-reminder"
             ]
           },
           {

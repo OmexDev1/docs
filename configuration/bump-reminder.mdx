@@ -1,0 +1,78 @@
+---
+title: "Bump Reminder"
+description: "Automatically remind members to bump your server on DISBOARD."
+icon: "bell"
+---
+
+## Why use bump reminders?
+
+Bump reminders help keep your server visible on **DISBOARD** by reminding members to run `/bump` every **2 hours**
+
+When someone bumps your server:
+
+• They receive a **thank you message**\
+• The **next reminder is scheduled automatically**\
+• The bot tracks the **last user who bumped**
+
+This helps your server stay active and visible on server listings
+
+---
+
+## Enabling bump reminders
+
+Enable the bump reminder system for your server
+
+```bash
+bumpreminder enable
+```
+
+This will activate bump tracking and create a default thank-you message
+
+---
+
+## Setting the reminder channel
+
+Choose the channel where reminders should be sent
+
+```bash
+bumpreminder channel #bump
+```
+
+The bot will post reminders every **2 hours** when the server can be bumped again
+
+---
+
+## Setting a ping role
+
+You can configure a role to be pinged whenever a reminder is sent
+
+```bash
+bumpreminder role @Bump
+```
+
+If no role is configured, the bot will ping **@here** instead
+
+---
+
+## Customizing the bump message
+
+You can customize the message sent after someone bumps the server
+
+```bash
+bumpreminder message Thanks {user.mention} for bumping **{guild.name}**!
+```
+
+The message supports
+
+• Plain text\
+[• Embed scripting](https://docs.omex.pro/Resources/Embeds)
+
+---
+
+## Embed message example
+
+```bash
+bumpreminder message {embed}$v{author: Thanks for bumping {guild.name}! && {user.avatar}}$v{description: Next bump {bumpreminder.next_bump}}
+```
+
+This will create a custom embed thanking the user and showing the next bump time [**you can view all Variables here**](https://docs.omex.pro/Resources/variables)
