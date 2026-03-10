@@ -1,0 +1,242 @@
+---
+title: "Join Gate"
+description: "Protect your server from raids, alt accounts, and suspicious joins"
+icon: "shield"
+---
+
+## Configuring the Antiraid System
+
+The **antiraid** system protects your Discord server against raids, suspicious accounts, and join spam\
+It includes protection against:
+
+- Mass join raids
+- Newly created accounts
+- Accounts with default profile pictures
+- Suspicious activity spikes
+
+To start using antiraid, first enable it
+
+<CodeGroup>
+
+```python Syntax
+antiraid enable
+```
+
+
+```python Example
+antiraid enable
+```
+
+</CodeGroup>
+
+This enables the system with default settings:
+
+- Minimum Account Age: `3 days`
+- Default Avatar Protection: `enabled`
+- Punishment: `ban`
+- Mass Join Detection: `disabled`
+
+---
+
+# Minimum Account Age
+
+This module prevents newly created accounts from joining your server.
+
+Accounts younger than the configured age will automatically be punished.
+
+<CodeGroup>
+
+```python Syntax
+antiraid age (days | on | off)
+```
+
+
+```python Example
+antiraid age 7
+```
+
+</CodeGroup>
+
+### Options
+
+**days**\
+Number of days an account must be old before joining.
+
+**on**\
+Enables the age check with the default value (`3 days`).
+
+**off**\
+Disables the age check.
+
+---
+
+# Punishment Type
+
+You can configure what action Omex should take when a suspicious account joins.
+
+Available punishments:
+
+- `ban`
+- `kick`
+- `jail`
+
+<CodeGroup>
+
+```python Syntax
+antiraid penalty (ban | kick | jail)
+```
+
+
+```python Example
+antiraid penalty ban
+```
+
+</CodeGroup>
+
+---
+
+# Default Avatar Protection
+
+Raid bots often use accounts without a profile picture.\
+This protection automatically punishes accounts that join without a custom avatar.
+
+<CodeGroup>
+
+```python Syntax
+antiraid pfp (on | off)
+```
+
+
+```python Example
+antiraid pfp on
+```
+
+</CodeGroup>
+
+---
+
+# Mass Join Detection
+
+This protection detects when many accounts join within a short period of time.
+
+If the join rate exceeds the configured limit, Omex will automatically punish the accounts involved.
+
+<CodeGroup>
+
+```python Syntax
+antiraid massjoin (on | off) [rate]
+```
+
+
+```python Example
+antiraid massjoin on 5
+```
+
+</CodeGroup>
+
+### Options
+
+**rate**\
+Maximum number of joins allowed within **5 seconds** before triggering protection.
+
+### Recommended Settings
+
+A safe value is usually between:
+
+```text
+3 - 8 joins / 5 seconds
+```
+
+---
+
+# Logging Antiraid Events
+
+You can configure a log channel to track antiraid actions such as bans, kicks, and raid detection.
+
+<CodeGroup>
+
+```python Syntax
+antiraid logging (channel)
+```
+
+
+```python Example
+antiraid logging #mod-logs
+```
+
+</CodeGroup>
+
+When configured, Omex will log:
+
+- Mass join detections
+- Account age violations
+- Default avatar punishments
+- Raid protection triggers
+
+---
+
+# Whitelisting Users
+
+Some users (such as staff, bots, or trusted members) may need to bypass antiraid checks.
+
+You can whitelist users so they are ignored by the system
+
+<CodeGroup>
+
+```python Syntax
+antiraid ignore (user)
+```
+
+
+```python Example
+antiraid ignore @Jonathan
+```
+
+</CodeGroup>
+
+Running the command again will remove the user from the whitelist.
+
+---
+
+# Viewing Whitelisted Users
+
+To see all users currently bypassing antiraid:
+
+```text
+antiraid whitelisted
+```
+
+This will display every whitelisted user in an embed.
+
+---
+
+# Viewing Antiraid Configuration
+
+To see the full configuration for your server:
+
+```text
+antiraid status
+```
+
+This shows:
+
+- Account age protection status
+- Avatar protection status
+- Mass join detection
+- Punishment type
+- Log channel
+- Number of whitelisted users
+
+---
+
+# Disabling Antiraid
+
+If needed, you can completely disable the system.
+
+```text
+antiraid off
+```
+
+This removes all configuration and cached settings.
+
+---
