@@ -24,7 +24,7 @@
             "group": "Security Setup",
             "pages": [
               "security/antinuke",
-              "security/antiraid",
+              "security/Antiraid",
               "security/filtering"
             ]
           },
