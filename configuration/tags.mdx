@@ -1,0 +1,176 @@
+---
+title: "Server Tags"
+description: "Automatically reward users who wear your server tag"
+icon: "tag"
+---
+
+## Overview
+
+Server Tags allow Omex to automatically reward members who **wear your server tag** in their Discord profile
+
+When a member wears your server tag, Omex can automatically give them a configured role and optionally send a thank-you message in a chosen channel. If the member later removes the server tag from their profile, the role will also be removed automatically. This allows servers to reward members who actively represent the community by showing the server tag on their profile.
+
+When a member wears your server tag, Omex can:
+
+• Automatically **grant a role**\
+• Send a **thank-you message**\
+• Remove the role if the tag is removed
+
+---
+
+<Info>
+  **You need the Manage Server permission to use these commands.**
+</Info>
+
+<Tip>
+  Encouraging members to wear your server tag can help grow your community and show support for your server Consider offering small perks, special roles, or recognition to members who proudly display the tag
+</Tip>
+
+---
+
+## Commands
+
+The `tag` command group allows administrators to manage the server tag system
+
+### Enable the system
+
+<CodeGroup>
+
+```javascript Syntax
+,tag enable
+```
+
+
+```javascript Example
+,tag enable
+```
+
+</CodeGroup>
+
+---
+
+### Disable the system
+
+<CodeGroup>
+
+```javascript Syntax
+,tag disable
+```
+
+
+```javascript Example
+,tag disable
+```
+
+</CodeGroup>
+
+---
+
+### Set the tag role
+
+<CodeGroup>
+
+```javascript Syntax
+,tag role @role
+```
+
+
+```javascript Example
+,tag role @Omex tag
+```
+
+</CodeGroup>
+
+<Warning>
+  The role must be below the bot's highest role or the bot will not be able to assign it
+</Warning>
+
+---
+
+### Set the thank-you channel
+
+<CodeGroup>
+
+```javascript Syntax
+,tag channel #channel
+```
+
+
+```javascript Example
+,tag channel #welcome
+```
+
+</CodeGroup>
+
+---
+
+### Custom message
+
+<CodeGroup>
+
+```javascript Syntax
+,tag message (message)
+```
+
+
+```javascript Example
+,tag message {embed}$v{author: Thanks for wearing the {guild.name} tag! && {user.avatar}}
+```
+
+</CodeGroup>
+
+---
+
+### View configuration
+
+<CodeGroup>
+
+```javascript Syntax
+,tag config
+```
+
+
+```javascript Example
+,tag config
+```
+
+</CodeGroup>
+
+---
+
+### List tagged members
+
+<CodeGroup>
+
+```javascript Syntax
+,tag list
+```
+
+
+```javascript Example
+,tag list
+```
+
+</CodeGroup>
+
+Aliases: `intag` `taglist` `whointag`
+
+---
+
+### Sync members
+
+<CodeGroup>
+
+```javascript Syntax
+,tag sync
+```
+
+
+```javascript Example
+,tag sync
+```
+
+</CodeGroup>
+
+---
+
