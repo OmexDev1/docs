@@ -37,6 +37,7 @@
               "configuration/customization",
               "configuration/restrictions",
               "configuration/statistics",
+              "configuration/tags",
               "configuration/bump-reminder"
             ]
           },
