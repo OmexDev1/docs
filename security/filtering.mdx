@@ -1,0 +1,208 @@
+---
+title: "Filtering"
+description: "Protect your server from spam, invites, blacklisted words, and malicious attachments"
+icon: "shield"
+---
+
+## Overview
+
+The **Filtering** module protects your server from unwanted content such as:
+
+- Blacklisted words
+- Discord invite links
+- Spam messages
+- Mention spam
+- Executable attachments
+- Images in restricted channels
+
+These protections help keep chats clean and prevent common raid or scam behaviors
+
+---
+
+## Adding a filtered word
+
+Use this command to add a word to the blacklist
+
+<CodeGroup>
+
+```javascript Syntax
+,filter add (word)
+```
+
+
+```javascript Example
+,filter add scam
+```
+
+</CodeGroup>
+
+Messages containing the word will be automatically deleted
+
+---
+
+## Removing a filtered word
+
+<CodeGroup>
+
+```javascript Syntax
+,filter remove (word)
+```
+
+
+```javascript Example
+,filter remove scam
+```
+
+</CodeGroup>
+
+---
+
+## Viewing filtered words
+
+<CodeGroup>
+
+```javascript Syntax
+,filter list
+```
+
+
+```javascript Example
+,filter list
+```
+
+</CodeGroup>
+
+---
+
+## Invite filtering
+
+Enable or disable blocking of Discord invite links
+
+<CodeGroup>
+
+```javascript Syntax
+,filter invites (on|off)
+```
+
+
+```javascript Example
+,filter invites on
+```
+
+</CodeGroup>
+
+---
+
+## Spam filtering
+
+Automatically detect and block rapid message spam.
+
+<CodeGroup>
+
+```javascript Syntax
+,filter spam (on|off)
+```
+
+
+```javascript Example
+,filter spam on
+```
+
+</CodeGroup>
+
+---
+
+## Mention filtering
+
+Prevents users from mass-mentioning members or roles
+
+<CodeGroup>
+
+```javascript Syntax
+,filter mention (on|off)
+```
+
+
+```javascript Example
+,filter mention on
+```
+
+</CodeGroup>
+
+---
+
+## Blocking executable attachments
+
+Prevent `.exe` files from being uploaded
+
+<CodeGroup>
+
+```javascript Syntax
+,filter exe (on|off)
+```
+
+
+```javascript Example
+,filter exe on
+```
+
+</CodeGroup>
+
+---
+
+## Image-only channels
+
+You can lock a channel so only images are allowed
+
+<CodeGroup>
+
+```javascript Syntax
+,filter imagelock (channel)
+```
+
+
+```javascript Example
+,filter imagelock #media
+```
+
+</CodeGroup>
+
+---
+
+## Whitelist
+
+Toggle filter exemption for a channel
+
+<CodeGroup>
+
+```javascript Syntax
+,filter whitelist (channel)
+```
+
+
+```javascript Example
+,filter whitelist #media
+```
+
+</CodeGroup>
+
+
+
+List exempt channels
+
+<CodeGroup>
+
+```javascript Syntax
+,filter whitelisted 
+```
+
+
+```javascript Example
+,filter whitelisted 
+```
+
+</CodeGroup>
+
+
+
+
