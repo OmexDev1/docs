@@ -23,7 +23,8 @@
           {
             "group": "Security Setup",
             "pages": [
-              "security/antinuke"
+              "security/antinuke",
+              "security/antiraid"
             ]
           },
           {
