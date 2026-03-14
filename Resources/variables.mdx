@@ -32,6 +32,63 @@ These variables are accessible throughout Omex and can be used in any command co
     | `{channel.id}`      | Channel ID      |
     | `{channel.mention}` | Channel mention |
   </Tab>
+  <Tab title="Leveling">
+    These variables are available inside **level-up message templates** (`level message <template>`).
+
+    Your level-up template can be plain text or embed script mode (`{embed}`):
+
+    | Variable                       | Output                                     |
+    | ------------------------------ | ------------------------------------------ |
+    | `{new.level}`                  | New level after leveling up                |
+    | `{old.level}`                  | Previous level before leveling up          |
+    | `{invisible}`                  | Zero-width spacing character               |
+    | `{botcolor}`                   | Bot display color hex (fallback `#2b2d31`) |
+    | `{user.joined_at}`             | User join timestamp (Discord formatted)    |
+    | `{user.created_at}`            | User account creation timestamp            |
+    | `{user.discriminator}`         | User discriminator                         |
+    | `{guild.count}`                | Guild member count                         |
+    | `{guild.count.format}`         | Guild member count with commas             |
+    | `{guild.created_at}`           | Guild creation timestamp                   |
+    | `{guild.boost_count}`          | Guild boost count                          |
+    | `{guild.booster_count}`        | Guild boost count (alias)                  |
+    | `{guild.boost_count.format}`   | Boost count with commas                    |
+    | `{guild.booster_count.format}` | Boost count with commas (alias)            |
+    | `{guild.boost_tier}`           | Guild boost tier                           |
+    | `{guild.vanity}`               | Guild vanity URL (or `none`)               |
+    | `{guild.icon}`                 | Guild icon URL                             |
+
+    This tab adds to the shared variables from **User**, **Guild**, and **Channel** above.
+  </Tab>
+  <Tab title="Moderation Invoke">
+    These variables are available inside **invoke/msgconfig templates** for actions: `ban`, `bandm`, `kick`, `kickdm`, `tempban`, `unban`, `timeout`.
+
+    Notes:
+
+    - Works in plain text and embed script mode
+    - `invoke` / `msgconfig` is premium-guild only
+    - `reason` falls back to your localized “No reason provided” text
+
+    | Variable              | Output                                                  |
+    | --------------------- | ------------------------------------------------------- |
+    | `{user}`              | Target user object string                               |
+    | `{user.name}`         | Target username                                         |
+    | `{user.mention}`      | Target mention                                          |
+    | `{user.id}`           | Target user ID                                          |
+    | `{target}`            | Alias of `{user}`                                       |
+    | `{target.name}`       | Alias of `{user.name}`                                  |
+    | `{target.mention}`    | Alias of `{user.mention}`                               |
+    | `{target.id}`         | Alias of `{user.id}`                                    |
+    | `{moderator}`         | Moderator object string                                 |
+    | `{moderator.name}`    | Moderator username                                      |
+    | `{moderator.mention}` | Moderator mention                                       |
+    | `{reason}`            | Action reason                                           |
+    | `{action}`            | Action keyword (`banned`, `kicked`, `tempbanned`, etc.) |
+    | `{duration}`          | Duration text (for temp actions)                        |
+    | `{until}`             | End timestamp text (for temp actions)                   |
+    | `{case_id}`           | Case ID (if provided by context)                        |
+
+    This tab also supports shared variables from **Guild** and **Channel** above.
+  </Tab>
   <Tab title="Bump Reminder">
     These variables are available inside **bump reminder message templates**.
 
