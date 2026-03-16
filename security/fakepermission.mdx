@@ -1,0 +1,167 @@
+---
+title: "Fake Permissions"
+description: "Grant command-only moderation access without giving full Discord permissions."
+icon: "shield-check"
+---
+
+## Why use fake permissions?
+
+Fake permissions let you grant access to Omex moderation commands without giving the same dangerous native Discord permissions to that user/role.
+
+This helps reduce abuse risk from compromised or rogue staff because they can only act through Omex command checks
+
+## How this works
+
+When you grant a fake permission (for example `manage bans`), that target can use Omex commands gated by that permission
+
+They still cannot use native Discord actions unless they already have the real Discord permission.
+
+<Warning>
+  The following commands can only be used by the **server owner**
+</Warning>
+
+---
+
+## commands
+
+<AccordionGroup>
+  <Accordion title="Grant a fake permission">
+    Use `fakepermissions add` (or `fp add`) to grant one fake permission to a user or role.
+
+    <CodeGroup>
+
+    ```javascript Syntax
+    ,fakepermissions add (user/role) (permission)
+    ```
+
+    
+    ```javascript Example
+    ,fp add @Flor manage nicknames
+    ```
+
+    </CodeGroup>
+
+    <Info>
+      Add one permission per command call. Do not use comma-separated lists.
+    </Info>
+  </Accordion>
+  <Accordion title="Revoke a fake permission">
+    Use `fakepermissions remove` (or `fp remove`) to revoke one fake permission from a user or role.
+
+    <CodeGroup>
+
+    ```javascript Syntax
+    ,fakepermissions remove (user/role) (permission)
+    ```
+
+    
+    ```javascript Example
+    ,fp remove @Flor manage nicknames
+    ```
+
+    </CodeGroup>
+
+    <CodeGroup>
+
+    ```javascript Revoke all for one target
+    ,fp remove @Flor all
+    ```
+
+    </CodeGroup>
+  </Accordion>
+  <Accordion title="View configured fake permissions">
+    Use `fakepermissions view` (or `fp view`) to view all fake permissions configured in the server.
+
+    <CodeGroup>
+
+    ```javascript Syntax
+    ,fakepermissions view
+    ```
+
+    
+    ```javascript Example
+    ,fp view
+    ```
+
+    </CodeGroup>
+  </Accordion>
+  <Accordion title="Clear all fake permissions in the server">
+    Use `fakepermissions clear` (or `fp clear`) to wipe all fake permission entries.
+
+    <CodeGroup>
+
+    ```javascript Syntax
+    ,fakepermissions clear
+    ```
+
+    
+    ```javascript Example
+    ,fp clear
+    ```
+
+    </CodeGroup>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Supported permissions
+
+Use one of the following names when running `fp add`/`fp remove`:
+
+- `manage bans`
+- `kick members`
+- `moderator members`
+- `moderate members`
+- `administrator`
+- `manage roles`
+- `manage channels`
+- `manage nicknames`
+- `manage messages`
+- `manage threads`
+
+---
+
+## Recommended setup
+
+{/* prettier-ignore */}
+
+<Tabs>
+  <Tab title="Moderator">
+    - `manage messages` - message moderation commands.
+    - `timeout members` - timeout-related commands.
+    - `manage nicknames` - nickname moderation commands.
+    - `kick members` - kick commands.
+
+    ```javascript
+    ,fp add @Moderator manage messages
+    ,fp add @Moderator timeout members
+    ,fp add @Moderator manage nicknames
+    ,fp add @Moderator kick members
+    ```
+  </Tab>
+  <Tab title="Administrator">
+    - `manage messages`
+    - `timeout members`
+    - `manage nicknames`
+    - `manage roles`
+    - `manage bans`
+    - `kick members`
+
+    ```javascript
+    ,fp add @Admin manage messages
+    ,fp add @Admin timeout members
+    ,fp add @Admin manage nicknames
+    ,fp add @Admin manage roles
+    ,fp add @Admin manage bans
+    ,fp add @Admin kick members
+    ```
+  </Tab>
+  <Tab title="Co-Owner">
+    - `administrator` - full fake-permission override in Omex checks.
+
+    ```javascript
+    ,fp add @Co-Owner administrator
+    ```
+  </Tab>
+</Tabs>
