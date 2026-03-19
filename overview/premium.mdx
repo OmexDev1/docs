@@ -13,34 +13,72 @@ icon: "dollar-sign"
 <Tabs>
   <Tab title="Tier 3">
     <AccordionGroup>
-      <Accordion title="Last.fm Account Linking">
-        Link your Last.fm account to Omex.
+      <Accordion title="Screenshot ">
+        Take a screenshot of a website.
 
         <CodeGroup>
 
         ```text Syntax
-        ,lastfm set (username)
+        ,screenshot (url)
         ```
 
-        
         ```text Example
-        ,lastfm set Aj.wtf
+        ,screenshot https://example.com
         ```
 
         </CodeGroup>
       </Accordion>
-      <Accordion title="Custom Self Prefix">
-        Set your own personal command prefix across all servers.
 
+      <Accordion title="customisation">
+        Customize Omex’s avatar, banner, and bio for your server
+
+        <CodeGroup>
+
+        ```text Syntax
+        ,customize avatar
+        ,customize banner
+        ,customize bio
+        ```
+
+        </CodeGroup>
+      </Accordion>
+
+      <Accordion title="Personal Prefix">
         <CodeGroup>
 
         ```text Syntax
         ,prefix self set (prefix)
         ```
 
-        
         ```text Example
-        ,prefix self set ??
+        ,prefix self set O
+        ```
+
+        </CodeGroup>
+      </Accordion>
+
+      <Accordion title="Lastfm Commands ">
+        <CodeGroup>
+
+        ```text Syntax
+        ,lastfm mode
+        ,lastfm np
+        ,lastfm toptracks
+        ,lastfm plays
+        ,lastfm crowns
+        
+        ```
+
+        </CodeGroup>
+      </Accordion>
+
+      <Accordion title="Level Customisation">
+        <CodeGroup>
+
+        ```text Syntax
+        ,level message
+        ,lastfm multiplier
+        ,lastfm givexp        
         ```
 
         </CodeGroup>
@@ -55,12 +93,59 @@ icon: "dollar-sign"
         <CodeGroup>
 
         ```text Syntax
-        ,chatgpt (question)
+        ,ai (question)
         ```
 
-        
         ```text Example
-        ,chatgpt who are you
+        ,ai who are you
+        ```
+
+        </CodeGroup>
+      </Accordion>
+
+      <Accordion title="FiveM Server Lookup">
+        Look up info and online players for a FiveM server.
+
+        <CodeGroup>
+
+        ```text Syntax
+        ,fivelookup (invite code)
+        ,fiveplayers (invite code)
+        ```
+
+        ```text Example
+        ,fivelookup abc123
+        ,fiveplayers abc123
+        ```
+
+        </CodeGroup>
+      </Accordion>
+
+      <Accordion title="Invite Info">
+        View information about a Discord invite code.
+
+        <CodeGroup>
+
+        ```text Syntax
+        ,inviteinfo (invite code)
+        ```
+
+        ```text Example
+        ,inviteinfo Omex
+        ```
+
+        </CodeGroup>
+      </Accordion>
+
+      <Accordion title="Playlists">
+        <CodeGroup>
+
+        ```text Syntax
+        ,playlist create
+        ,playlist add
+        ,playlist remove
+        ,playlist list
+        ,playlist play
         ```
 
         </CodeGroup>
@@ -69,32 +154,56 @@ icon: "dollar-sign"
   </Tab>
   <Tab title="Tier 1">
     <AccordionGroup>
-      <Accordion title="Statistics Module Access">
+      <Accordion title="Statistics">
         Unlock access to the **Statistics** module, allowing you to create live counter channels for your server.
 
         <CodeGroup>
 
+        ```text Syntax
+        ,statistics set members #members
+        ,statistics remove #channel
+        ,statistics clear
+        ,statistics list
+        ```
+
         ```text Example
         ,statistics set members #members
+        ,statistics remove #members
+        ,statistics clear
+        ,statistics list
         ```
 
         </CodeGroup>
       </Accordion>
-      <Accordion title="emoji steal">
-        Steal the provided emoji
+
+      <Accordion title="Steal Emoji">
+        Steal the provided emoji for your server.
 
         <CodeGroup>
 
+        ```text Syntax
+        ,steal (emoji) (name)
+        ```
+
         ```text Example
-        steal (emoji) (name)
+        ,steal :smile: smile
         ```
 
         </CodeGroup>
       </Accordion>
-      <Accordion title="customisation">
-      
-      Customize Omex’s avatar, banner, and bio for your server
-        
+
+      <Accordion title="Custom Jail Message">
+        <CodeGroup>
+
+        ```text Syntax
+        ,jailmessage (message/embed code)
+        ```
+
+        ```text Example
+        ,jailmessage {user.mention} you have been jailed! To be unjailed please contact a server moderator 
+        ```
+
+        </CodeGroup>
       </Accordion>
     </AccordionGroup>
   </Tab>
