@@ -33,6 +33,14 @@
           {
             "group": "Server Configuration",
             "pages": [
+          {
+            "group": "Messages",
+            "icon": "message",
+            "pages": [
+              "configuration/greeting",
+              "configuration/autoresponder"
+            ]
+          },
               "configuration/logging",
               "configuration/language",
               "configuration/aliases",
@@ -40,7 +48,6 @@
               "configuration/restrictions",
               "configuration/statistics",
               "configuration/tags",
-              "configuration/greeting",
               "configuration/bump-reminder"
             ]
           },
