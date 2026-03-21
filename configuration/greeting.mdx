@@ -1,0 +1,127 @@
+---
+title: "Greeting"
+description: "Configure welcome messages for new members"
+icon: "wave"
+---
+
+## Overview
+
+The greeting system lets you send a custom message or embed to a channel when a new member joins your server. This is useful for welcoming users, sharing server rules, or providing important info
+
+<Info>
+  Greeting messages can use variables and embed scripting. See the [Variables](../Resources/variables.mdx) page for all available placeholders.
+</Info>
+
+<Tip>
+  You can use both plain text and embed scripting for your greeting message. See [Embeds](../Resources/Embeds.mdx) for advanced formatting
+</Tip>
+
+---
+
+## View current greeting setup
+
+See your current greeting channel and message:
+
+<CodeGroup>
+
+```javascript Syntax
+,greeting
+```
+
+```javascript Example
+,greeting
+```
+
+</CodeGroup>
+
+---
+
+## Enable greeting
+
+Enable the greeting module for your server:
+
+<CodeGroup>
+
+```javascript Syntax
+,greeting enable
+```
+
+```javascript Example
+,greeting enable
+```
+
+</CodeGroup>
+
+---
+
+## Set greeting channel
+
+Choose which channel receives the greeting message:
+
+<CodeGroup>
+
+```javascript Syntax
+,greeting channel <channel>
+```
+
+```javascript Example
+,greeting channel #welcome
+```
+
+</CodeGroup>
+
+---
+
+## Set greeting message
+
+Set the message or embed sent to new members:
+
+<CodeGroup>
+
+```javascript Syntax
+,greeting message <message>
+```
+
+```javascript Example
+,greeting message Welcome {user.mention} to {guild.name}!
+,greeting message {embed}$vtitle:Welcome!$vdescription:Hello {user.mention}, glad to have you in {guild.name}!$vcolor:#5865F2
+```
+
+</CodeGroup>
+
+---
+
+## Test greeting message
+
+Preview your greeting message by sending it to yourself:
+
+<CodeGroup>
+
+```javascript Syntax
+,greeting test
+```
+
+```javascript Example
+,greeting test
+```
+
+</CodeGroup>
+
+---
+
+## Disable greeting
+
+Turn off the greeting module:
+
+<CodeGroup>
+
+```javascript Syntax
+,greeting disable
+```
+
+```javascript Example
+,greeting disable
+```
+
+</CodeGroup>
+
